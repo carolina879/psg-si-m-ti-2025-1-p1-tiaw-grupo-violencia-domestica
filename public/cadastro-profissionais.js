@@ -89,7 +89,7 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 
   // Envia para o servidor
   try {
-    const response = await fetch("/api/cadastros", {
+    const response = await fetch("/profissional", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cadastro),
