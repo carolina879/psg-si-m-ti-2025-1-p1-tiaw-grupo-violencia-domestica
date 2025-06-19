@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+   <link rel="stylesheet" href="denuncia.css">
+  <script src="denuncia.js"></script>
+    <title>Cadastro de Denuncias</title>
+</head>
+
+<body>
+
+
+<!-- Cabeçalho -->
+<header>
+
+</header>
+
+<!-- Conteudo -->
+<main>
+   <div class="d-flex justify-content-center align-items-center vh-100"> 
+    <form class="row g-3 w-75 w-md-50" id="formDenuncia1">
+        <div class="col-md-6">
+          <label for="inputName" class="form-label">Nome Completo</label>
+          <input type="text" class="form-control" id="inputName">
+        </div>
+        <div class="col-md-6">
+          <label for="inputTel" class="form-label">Telefone</label>
+          <input type="tel" class="form-control" id="inputTel" placeholder="(00) 00000-0000">
+        </div>
+        <div class="col-12">
+          <label for="inputEmail4" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="inputEmail4" placeholder="">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress2" class="form-label">Data da ocorrência</label>
+          <input type="date" class="form-control" id="inputAddress2" placeholder="DD/MM/AAAA">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Local da ocorrência</label>
+          <input type="text" class="form-control" id="inputCity" placeholder="Cidade - SIGLA DO ESTADO">
+        </div>      
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Denuncia Anônima <br><small><em>Não revelaremos sua identidade, mas você <br>não podera receber atualizações.</em></small>
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-secondary me-2">Continuar</button>
+        </div>
+      </form>
+   </div>
+
+</main>
+
+<!-- Rodapé -->
+<footer>
+
+</footer>
+
+
+
+
+
+<script>
+  document.getElementById('formDenuncia1').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('inputName').value.trim();
+    const telefone = document.getElementById('inputTel').value.trim();
+    const email = document.getElementById('inputEmail4').value.trim();
+    const data = document.getElementById('inputAddress2').value.trim();
+    const local = document.getElementById('inputCity').value.trim();
+
+    if (!nome || !telefone || !email || !data || !local) {
+      alert("Por favor, preencha todos os campos obrigatórios.");
+      return;
+    }
+
+  
+
+    const dadosParte1 = {
+      nome: document.getElementById('inputName').value.trim(),
+      telefone: document.getElementById('inputTel').value.trim(),
+      email: document.getElementById('inputEmail4').value.trim(),
+      data: document.getElementById('inputAddress2').value.trim(),
+      local: document.getElementById('inputCity').value.trim()
+    };
+
+  localStorage.setItem('denunciaParte1', JSON.stringify(dadosParte1));
+
+
+    window.location.href = 'cadastro2.html';
+  });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
