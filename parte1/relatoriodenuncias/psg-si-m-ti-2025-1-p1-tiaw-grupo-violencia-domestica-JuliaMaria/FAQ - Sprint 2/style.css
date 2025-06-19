@@ -1,0 +1,294 @@
+/* ===== Reset Básico ===== */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Container principal ===== */
+.container {
+  max-width: 900px;
+  width: 90vw;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* ===== Cabeçalho ===== */
+.cabecalho {
+  background-color: #ccc;
+  padding: 1.25rem 0;
+  text-align: center;
+}
+
+.cabecalho .titulo {
+  background-color: #fff;
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 0.375rem;
+  font-size: 1.75rem;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  user-select: none;
+}
+
+/* ===== Busca e disfarce ===== */
+.busca-disfarce {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.busca-disfarce input[type="text"] {
+  flex: 1 1 300px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #999;
+  border-radius: 0.375rem;
+  min-width: 180px;
+  transition: border-color 0.3s;
+}
+
+.busca-disfarce input[type="text"]:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+.busca-disfarce button {
+  flex: 0 1 160px;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  background-color: #0066cc;
+  border: none;
+  color: white;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.busca-disfarce button:hover {
+  background-color: #004a99;
+}
+
+/* ===== FAQ ===== */
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: background-color 0.3s;
+  padding: 1rem;
+}
+
+.faq-item:hover {
+  background-color: #f0f8ff;
+}
+
+.pergunta {
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pergunta span {
+  font-size: 1.5rem;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+.resposta {
+  padding-top: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  user-select: text;
+}
+
+/* ===== Formulários ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+textarea,
+input[type="text"] {
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ccc;
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+form button {
+  align-self: flex-start;
+  padding: 0.75rem 2rem;
+  background-color: #009933;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #007a29;
+}
+
+/* ===== Perguntas da Comunidade ===== */
+#lista-comunidade .faq-item {
+  border: 1px dashed #aaa;
+  background: #f5f5f5;
+  font-size: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.375rem;
+}
+
+#lista-comunidade textarea {
+  margin-top: 0.5rem;
+  width: 100%;
+  min-height: 80px;
+  border-radius: 0.375rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+#lista-comunidade .botoes-comunidade {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#lista-comunidade button {
+  padding: 0.5rem 1rem;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+#lista-comunidade button:hover {
+  background-color: #444;
+}
+
+/* Botões com cores específicas */
+#lista-comunidade button.responder {
+  background-color: #007bff;
+}
+
+#lista-comunidade button.responder:hover {
+  background-color: #0056b3;
+}
+
+#lista-comunidade button.editar {
+  background-color: #ffc107;
+  color: #222;
+}
+
+#lista-comunidade button.editar:hover {
+  background-color: #e0a800;
+}
+
+#lista-comunidade button.excluir {
+  background-color: #dc3545;
+}
+
+#lista-comunidade button.excluir:hover {
+  background-color: #a71d2a;
+}
+
+#lista-comunidade button.adicionar-faq {
+  background-color: #28a745;
+}
+
+#lista-comunidade button.adicionar-faq:hover {
+  background-color: #1e7e34;
+}
+
+/* ===== Rodapé ===== */
+.rodape {
+  background-color: #ccc;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  color: #333;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.4);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+  .cabecalho .titulo {
+    font-size: 1.5rem;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .pergunta {
+    font-size: 1rem;
+  }
+
+  .resposta {
+    font-size: 0.95rem;
+  }
+
+  form button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .busca-disfarce {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .busca-disfarce input[type="text"],
+  .busca-disfarce button {
+    width: 100%;
+  }
+
+  .cabecalho .titulo {
+    font-size: 1.3rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .pergunta {
+    font-size: 0.95rem;
+  }
+
+  .resposta {
+    font-size: 0.9rem;
+  }
+}

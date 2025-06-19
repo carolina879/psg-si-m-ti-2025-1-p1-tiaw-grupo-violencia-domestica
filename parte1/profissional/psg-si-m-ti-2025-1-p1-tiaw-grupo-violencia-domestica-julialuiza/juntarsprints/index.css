@@ -1,0 +1,195 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body geral */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff6ff;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* NAVBAR */
+.custom-navbar {
+  background-color: #cb6ce6;
+  padding: 15px 30px;
+  border-bottom: 3px solid #ff5757;
+}
+
+.custom-navbar .navbar-brand img {
+  max-width: 200px;
+  height: auto;
+}
+
+.site-name {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin-left: 20px;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffe9fe !important;
+  text-decoration: underline;
+}
+
+/* Destaque no menu */
+.destaque {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff !important;
+  background-color: #ff5757;
+  padding: 5px 12px;
+  border-radius: 8px;
+  margin-left: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.destaque:hover {
+  background-color: #ff7373;
+}
+
+/* CONTEÚDO PRINCIPAL */
+main {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+main h1 {
+  color: #cb6ce6;
+  margin-top: 40px;
+  font-size: 2rem;
+  border-left: 5px solid #ff5757;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+main h5 {
+  color: #ff5757;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+main p, ul {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+main ul {
+  padding-left: 20px;
+}
+
+main li {
+  margin-bottom: 5px;
+}
+
+main img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+/* SEÇÃO: Círculo da Violência / Tipos de Violência */
+.secao-com-imagem-lateral {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding-left: 30px;
+}
+
+.secao-com-imagem-lateral h2 {
+  color: #cb6ce6;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.secao-com-imagem-lateral img {
+  width: 500px;
+  max-width: 90%;
+  align-self: center; 
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Seção "Não se cale" com menos espaçamento */
+.imagem-com-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px; 
+  text-align: center;
+}
+
+.imagem-com-texto img {
+  max-width: 100%;
+  width: 300px;
+  border-radius: 12px;
+ height: 300px;
+  margin-bottom: 15px;
+}
+
+
+.imagem-com-texto h2 {
+  color: #ff5757;
+  font-size: 2rem;
+  font-weight: bold;
+
+}
+
+h3{
+    color: #ff5757;
+}
+
+/* RESPONSIVIDADE ÚNICA */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-nav .nav-link {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .custom-navbar {
+    padding: 10px 20px;
+  }
+
+  .site-name {
+    font-size: 1.3rem;
+  }
+
+  main h1 {
+    font-size: 1.6rem;
+  }
+
+  .dupla-imagem {
+    flex-direction: column;
+  }
+
+  .imagem-com-texto img {
+    width: 100%;
+  }
+
+  .imagem-com-texto h2 {
+    font-size: 1.6rem;
+  }
+}

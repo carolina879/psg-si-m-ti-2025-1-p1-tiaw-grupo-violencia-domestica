@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <style>
+    body {
+        background-color: white;
+        color: #cb6ce6;
+    }
+    .navbar {
+        background-color: #cb6ce6;
+    }
+    .card {
+        background-color: #b6b5b5;
+        color: white;
+        border-radius: 0; /* Remove bordas arredondadas */
+         
+    }
+    .btn-primary {
+        background-color: #ff5757;
+        border-color: #ff5757;
+        border-radius: 0; /* Remove bordas arredondadas */
+    }
+    .btn-primary:hover {
+        background-color: #cb6ce6;
+        border-color: #cb6ce6;
+    }
+    .btn-light {
+        background-color: #ff5757;
+        color: rgb(17, 17, 17);
+        border-radius: 0; /* Remove bordas arredondadas */
+    }
+    .btn-light:hover {
+        background-color: #cb6ce6;
+        color: rgb(8, 8, 8);
+    }
+    h1, h2 {
+        color: #ffffff;
+        background-color: #cb6ce6;
+        padding: 10px;
+        text-align: center;
+    }
+    .relatorio-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Garante que o contêiner ocupe a altura total da página */
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-dark">Seu perfil</a>
+        </div>
+    </nav>
+
+    <div class="Suas denúncias">
+        <div class="list-group m-3" id="denunciasList">
+        </div>
+    </div>
+
+    <div class="cards-denuncias m-3" id="navbar">
+        <h2>Atendimentos Registrados</h2>
+        <div id="cardsContainer" class="row">
+     </div>
+    </div>
+
+    <div class="Relatório de denuncias" >
+        <h1 class="p-3" >Registrar Atendimento</h1>
+        <div class="card m-3 p-4" style="width: 100%; max-width: 40rem; margin: auto;" id="relatorio-container">
+            <form id="atendimentoForm">
+                <label class="p-2 m-2" for="nomeProfissional">Nome do Profissional:</label>
+                <input class="form-control" type="text" id="nomeProfissional" required>
+                <label class="p-2 m-2" for="tipoProfissional">Tipo de Profissional:</label>
+                <select class="form-control" id="tipoProfissional" required>
+                    <option value="advogado">Advogado</option>
+                    <option value="psicologo">Psicólogo</option>
+                    <option value="ong">ONG</option>
+                    <option value="assistente_social">Assistente Social</option>
+                    <option value="voluntario">Voluntário</option> 
+                </select>
+                <label class="p-2 m-2" for="feedback">Feedback (opcional):</label>
+                <textarea class="form-control" id="feedback" rows="5"></textarea>
+                <button class="btn btn-light mt-3" type="submit">Salvar Atendimento</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="nova denuncia">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="#atendimentoForm" class="btn btn-primary" role="button">Realizar nova denúncia</a>
+            <a href="profissional .html" class="btn btn-primary" role="button">Fale com nossos colaboradores</a>
+        </div>
+    </div>
+
+    <script>
+        const validaprofissional = [
+            { id: 1, name: "Ana", type: "psicologo" },
+            { id: 2, name: "Carlos", type: "psicologo" },
+            { id: 3, name: "Fernanda", type: "psicologo" },
+            { id: 4, name: "João", type: "psicologo" },
+            { id: 5, name: "Mariana", type: "psicologo" },
+            { id: 6, name: "Pedro", type: "psicologo" },
+            { id: 7, name: "Cuidar", type: "assistente social" },
+            { id: 8, name: "Amparo", type: "assistente social" },
+            { id: 9, name: "Solidariedade", type: "assistente social" },
+            { id: 10, name: "Esperança", type: "assistente social" },
+            { id: 11, name: "Apoio", type: "assistente social" },
+            { id: 12, name: "União", type: "assistente social" },
+            { id: 13, name: "Roberto", type: "advogados" },
+            { id: 14, name: "Cláudia", type: "advogados" },
+            { id: 15, name: "Eduardo", type: "advogados" },
+            { id: 16, name: "Sofia", type: "advogados" },
+            { id: 17, name: "Ricardo", type: "advogados" },
+            { id: 18, name: "Beatriz", type: "advogados" },
+            { id: 19, name: "Lucas", type: "assistente social" },
+            { id: 20, name: "Gabriela", type: "assistente social" },
+            { id: 21, name: "Mateus", type: "assistente social" },
+            { id: 22, name: "Juliana", type: "assistente social" },
+            { id: 23, name: "André", type: "assistente social" },
+            { id: 24, name: "Larissa", type: "assistente social" },
+        ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const atendimentoForm = document.getElementById("atendimentoForm");
+        const cardsContainer = document.getElementById("cardsContainer");
+
+        let atendimentosPorTipo = JSON.parse(localStorage.getItem("atendimentosPorTipo")) || {};
+        let rankingProfissionais = JSON.parse(localStorage.getItem("rankingProfissionais")) || {};
+        let atendimentos = JSON.parse(localStorage.getItem("atendimentos")) || [];
+
+        function criarCard(atendimento, index) {
+            const card = document.createElement("div");
+            card.className = "card col-md-4 m-2 p-3";
+            card.setAttribute("data-index", index); // Adiciona um atributo para identificar o card
+            card.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Nome: ${atendimento.nomeProfissional}</h5>
+                    <p class="card-text">Tipo: ${atendimento.tipoProfissional}</p>
+                    <p class="card-text">Feedback: ${atendimento.feedback || "Nenhum feedback fornecido"}</p>
+                    <p class="card-text"><small class="text-muted">Data: ${atendimento.data}</small></p>
+                    <p class="card-text"><strong>Total de atendimentos (${atendimento.tipoProfissional}): ${atendimentosPorTipo[atendimento.tipoProfissional]}</strong></p>
+                    <button class="btn btn-danger btn-sm excluir-btn">Excluir</button>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+        }
+
+        function excluirAtendimento(index) {
+            const atendimento = atendimentos[index];
+
+            // Atualizar contadores
+            atendimentosPorTipo[atendimento.tipoProfissional]--;
+            if (atendimentosPorTipo[atendimento.tipoProfissional] === 0) {
+                delete atendimentosPorTipo[atendimento.tipoProfissional];
+            }
+
+            rankingProfissionais[atendimento.nomeProfissional]--;
+            if (rankingProfissionais[atendimento.nomeProfissional] === 0) {
+                delete rankingProfissionais[atendimento.nomeProfissional];
+            }
+
+            // Remover do array e do localStorage
+            atendimentos.splice(index, 1);
+            localStorage.setItem("atendimentos", JSON.stringify(atendimentos));
+            localStorage.setItem("atendimentosPorTipo", JSON.stringify(atendimentosPorTipo));
+            localStorage.setItem("rankingProfissionais", JSON.stringify(rankingProfissionais));
+
+            // Atualizar interface
+            limparCards();
+            atendimentos.forEach(criarCard);
+        }
+
+        function limparCards() {
+            cardsContainer.innerHTML = "";
+        }
+
+        // Adiciona um listener para os botões de exclusão
+        cardsContainer.addEventListener("click", (event) => {
+            if (event.target.classList.contains("excluir-btn")) {
+                const card = event.target.closest(".card");
+                const index = parseInt(card.getAttribute("data-index"), 10);
+                excluirAtendimento(index);
+            }
+        });
+       atendimentoForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nomeProfissional = document.getElementById("nomeProfissional").value.trim();
+    const tipoProfissional = document.getElementById("tipoProfissional").value;
+    const feedback = document.getElementById("feedback").value;
+
+    // Validação do nome
+    const nomeValido = validaprofissional.some(profissional =>
+        profissional.name.trim().toLowerCase() === nomeProfissional.toLowerCase()
+    );
+
+    if (!nomeValido) {
+        alert("O nome do profissional não é válido. Por favor, insira um nome válido.");
+        return;
+    }
+
+    const atendimento = {
+        nomeProfissional,
+        tipoProfissional,
+        feedback,
+        data: new Date().toLocaleString()
+    };
+
+    // Atualizar contadores por tipo de profissional
+    if (!atendimentosPorTipo[tipoProfissional]) {
+        atendimentosPorTipo[tipoProfissional] = 0;
+    }
+    atendimentosPorTipo[tipoProfissional]++;
+
+    // Atualizar contadores por nome do profissional
+    if (!rankingProfissionais[nomeProfissional]) {
+        rankingProfissionais[nomeProfissional] = 0;
+    }
+    rankingProfissionais[nomeProfissional]++;
+
+    localStorage.setItem("atendimentosPorTipo", JSON.stringify(atendimentosPorTipo));
+    localStorage.setItem("rankingProfissionais", JSON.stringify(rankingProfissionais));
+
+    atendimentos.push(atendimento);
+    localStorage.setItem("atendimentos", JSON.stringify(atendimentos));
+
+    criarCard(atendimento, atendimentos.length - 1);
+
+    atendimentoForm.reset();
+
+    alert("Atendimento registrado com sucesso!");
+});
+
+function criarCard(atendimento, index) {
+    const card = document.createElement("div");
+    card.className = "card col-md-4 m-2 p-3";
+    card.setAttribute("data-index", index); // Adiciona um atributo para identificar o card
+    card.innerHTML = `
+        <div class="card-body">
+            <h5 class="card-title">Nome: ${atendimento.nomeProfissional}</h5>
+            <p class="card-text">Tipo: ${atendimento.tipoProfissional}</p>
+            <p class="card-text">Feedback: ${atendimento.feedback || "Nenhum feedback fornecido"}</p>
+            <p class="card-text"><small class="text-muted">Data: ${atendimento.data}</small></p>
+            <p class="card-text"><strong>Total de atendimentos (${atendimento.nomeProfissional}): ${rankingProfissionais[atendimento.nomeProfissional]}</strong></p>
+            <button class="btn btn-danger btn-sm excluir-btn">Excluir</button>
+        </div>
+    `;
+    cardsContainer.appendChild(card);
+}
+        atendimentos.forEach((atendimento, index) => criarCard(atendimento, index));
+    });
+</script>
+
+</body>
+</html>

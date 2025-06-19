@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat por Profissional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-bar input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            flex: 1;
+        }
+        .search-bar select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .search-bar button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #cb6ce6; 
+            color: white;
+            cursor: pointer;
+        }
+        .professional-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .professional-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 15px);
+            text-align: center;
+        }
+        .professional-card button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff5757; 
+            color: white;
+            cursor: pointer;
+        }
+        .chat-section {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chat-input input[type="file"] {
+            display: none;
+        }
+        .chat-input button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #cb6ce6; 
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="top-professionals-section" style="background-color: #cb6ce6; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin: 0;">Profissionais que mais atenderam</h3>
+            <ul id="topProfessionalsList" style="list-style: none; padding: 0; margin: 0;"></ul>
+        </div>
+
+    
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Digite o nome ou tipo do profissional...">
+            <button onclick="searchProfessionals()">Pesquisar</button>
+        </div>
+
+      
+        <div class="professional-list"></div>
+
+        
+        <div class="chat-section">
+            <h2 id="chatTitle">Chat</h2>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatMessage" placeholder="Digite sua mensagem...">
+                <input type="file" id="fileInput" accept="image/*,audio/*,video/*">
+                <button onclick="sendMessage()">Enviar</button>
+                <button onclick="document.getElementById('fileInput').click()">Anexar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const professionals = [
+            { id: 1, name: "Ana (Psicóloga)", type: "psicologos" },
+            { id: 2, name: "Carlos (Psicólogo)", type: "psicologos" },
+            { id: 3, name: "Fernanda (Psicóloga)", type: "psicologos" },
+            { id: 4, name: "João (Psicólogo)", type: "psicologos" },
+            { id: 5, name: "Mariana (Psicóloga)", type: "psicologos" },
+            { id: 6, name: "Pedro (Psicólogo)", type: "psicologos" },
+            { id: 7, name: "Cuidar (Assistente Social)", type: "assistente social" },
+            { id: 8, name: "Amparo (Assistente Social)", type: "assistente social" },
+            { id: 9, name: "Solidariedade (Assistente Social)", type: "assistente social" },
+            { id: 10, name: "Esperança (Assistente Social)", type: "assistente social" },
+            { id: 11, name: "Apoio (Assistente Social)", type: "assistente social" },
+            { id: 12, name: "União (Assistente Social)", type: "assistente social" },
+            { id: 13, name: "Roberto (Advogado)", type: "advogados" },
+            { id: 14, name: "Cláudia (Advogada)", type: "advogados" },
+            { id: 15, name: "Eduardo (Advogado)", type: "advogados" },
+            { id: 16, name: "Sofia (Advogada)", type: "advogados" },
+            { id: 17, name: "Ricardo (Advogado)", type: "advogados" },
+            { id: 18, name: "Beatriz (Advogada)", type: "advogados" },
+            { id: 19, name: "Lucas (Assistente Social)", type: "assistente social" },
+            { id: 20, name: "Gabriela (Assistente Social)", type: "assistente social" },
+            { id: 21, name: "Mateus (Assistente Social)", type: "assistente social" },
+            { id: 22, name: "Juliana (Assistente Social)", type: "assistente social" },
+            { id: 23, name: "André (Assistente Social)", type: "assistente social" },
+            { id: 24, name: "Larissa (Assistente Social)", type: "assistente social" },
+        ];
+
+        const atendimentos = [
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-01T10:00:00" },
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-01T11:00:00" },
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-01T12:00:00" },
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-03T10:00:00" },
+            { idProfissional: 2, nomeProfissional: "Carlos (Psicólogo)", data: "2025-05-03T11:00:00" },
+            { idProfissional: 3, nomeProfissional: "Fernanda (Psicóloga)", data: "2025-05-03T12:00:00" },
+            { idProfissional: 4, nomeProfissional: "João (Psicólogo)", data: "2025-05-03T13:00:00" },
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-03T14:00:00" },
+            { idProfissional: 6, nomeProfissional: "Pedro (Psicólogo)", data: "2025-05-03T15:00:00" },
+            { idProfissional: 3, nomeProfissional: "Fernanda (Psicóloga)", data: "2025-05-03T16:00:00" },
+            { idProfissional: 4, nomeProfissional: "João (Psicólogo)", data: "2025-05-03T17:00:00" },
+            { idProfissional: 5, nomeProfissional: "Mariana (Psicóloga)", data: "2025-05-03T18:00:00" },
+            { idProfissional: 6, nomeProfissional: "Pedro (Psicólogo)", data: "2025-05-03T19:00:00" },
+            { idProfissional: 7, nomeProfissional: "Cuidar (ONG)", data: "2025-05-03T20:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-03T21:00:00" },
+            { idProfissional: 9, nomeProfissional: "Solidariedade (ONG)", data: "2025-05-02T10:00:00" },
+            { idProfissional: 9, nomeProfissional: "Solidariedade (ONG)", data: "2025-05-02T11:00:00" },
+            { idProfissional: 9, nomeProfissional: "Solidariedade (ONG)", data: "2025-05-02T12:00:00" },
+            { idProfissional: 9, nomeProfissional: "Solidariedade (ONG)", data: "2025-05-03T22:00:00" },
+            { idProfissional: 10, nomeProfissional: "Esperança (ONG)", data: "2025-05-03T23:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-01T10:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-02T11:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-03T12:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-04T13:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-05T14:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-06T15:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-07T16:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-08T17:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-09T18:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-10T19:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-11T20:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-12T21:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-13T22:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-14T23:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-15T10:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-16T11:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-17T12:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-18T13:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-19T14:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-20T15:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-21T16:00:00" },
+            { idProfissional: 22, nomeProfissional: "Juliana (Voluntária)", data: "2025-05-22T17:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-01T10:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-02T11:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-03T12:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-04T13:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-05T14:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-06T15:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-07T16:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-08T17:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-09T18:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-10T19:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-11T20:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-12T21:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-13T22:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-14T23:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-15T10:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-16T11:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-17T12:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-18T13:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-19T14:00:00" },
+            { idProfissional: 8, nomeProfissional: "Amparo (ONG)", data: "2025-05-20T15:00:00" }
+        ];
+
+        
+        for (let i = 1; i <= 80; i++) {
+            atendimentos.push({
+                idProfissional: 20,
+                nomeProfissional: "Gabriela (Voluntária)",
+                data: `2025-${String(Math.ceil(i / 7)).padStart(2, '0')}-${String((i % 7) + 1).padStart(2, '0')}T10:00:00`
+            });
+        }
+
+        for (let i = 1; i <= 80; i++) {
+            atendimentos.push({
+                idProfissional: 23,
+                nomeProfissional: "André (Voluntário)",
+                data: `2025-${String(Math.ceil(i / 7)).padStart(2, '0')}-${String((i % 7) + 1).padStart(2, '0')}T11:00:00`
+            });
+        }
+
+        const professionalList = document.querySelector('.professional-list');
+        const chatSection = document.querySelector('.chat-section');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatTitle = document.getElementById('chatTitle');
+        const chatInput = document.getElementById('chatMessage');
+        const fileInput = document.getElementById('fileInput');
+
+        const chatData = {};
+
+        function loadProfessionals() {
+            professionalList.innerHTML = '';
+            professionals.forEach(prof => {
+                const card = document.createElement('div');
+                card.className = 'professional-card';
+                card.innerHTML = `
+                    <h3>${prof.name}</h3>
+                    <button onclick="startChat(${prof.id}, '${prof.name}')">Ir para o Chat</button>
+                `;
+                professionalList.appendChild(card);
+            });
+        }
+
+        let currentProfessionalId = null;
+
+        function startChat(professionalId, professionalName) {
+            currentProfessionalId = professionalId;
+            chatSection.style.display = 'block'; 
+            chatTitle.textContent = `Chat com ${professionalName}`; 
+            if (!chatData[professionalId]) chatData[professionalId] = []; 
+            loadChatMessages(professionalId); 
+
+            
+            chatSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function loadChatMessages(professionalId) {
+            chatMessages.innerHTML = '';
+            chatData[professionalId].forEach(message => {
+                const messageElement = document.createElement('p');
+                messageElement.innerHTML = message;
+                chatMessages.appendChild(messageElement);
+            });
+        }
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            const file = fileInput.files[0];
+
+            if (message) {
+                const messageElement = `<strong>Você:</strong> ${message}`;
+                chatData[currentProfessionalId].push(messageElement);
+                chatInput.value = '';
+            }
+
+            if (file) {
+                let fileElement = '';
+                if (file.type.startsWith('image/')) {
+                    const img = `<img src="${URL.createObjectURL(file)}" style="max-width: 200px;">`;
+                    fileElement = `<strong>Você enviou uma imagem:</strong> ${img}`;
+                } else if (file.type.startsWith('audio/')) {
+                    const audio = `<audio controls src="${URL.createObjectURL(file)}"></audio>`;
+                    fileElement = `<strong>Você enviou um áudio:</strong> ${audio}`;
+                } else if (file.type.startsWith('video/')) {
+                    const video = `<video controls style="max-width: 200px;" src="${URL.createObjectURL(file)}"></video>`;
+                    fileElement = `<strong>Você enviou um vídeo:</strong> ${video}`;
+                }
+                chatData[currentProfessionalId].push(fileElement);
+                fileInput.value = '';
+            }
+
+            loadChatMessages(currentProfessionalId);
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
+        }
+
+        chatInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage(); 
+            }
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                searchProfessionals(); 
+            }
+        });
+
+        function searchProfessionals() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+
+            const filteredProfessionals = professionals.filter(prof =>
+                prof.name.toLowerCase().includes(query) || prof.type.toLowerCase().includes(query)
+            );
+
+            professionalList.innerHTML = '';
+            filteredProfessionals.forEach(prof => {
+                const card = document.createElement('div');
+                card.className = 'professional-card';
+                card.innerHTML = `
+                    <h3>${prof.name}</h3>
+                    <button onclick="startChat(${prof.id}, '${prof.name}')">Ir para o Chat</button>
+                `;
+                console.log(`Redirecionando para chat.html?id=${prof.id}&name=${encodeURIComponent(prof.name)}`);
+                professionalList.appendChild(card);
+            });
+        }
+
+        function showTopProfessional() {
+            const timeFilter = document.getElementById('timeFilter').value;
+            const now = new Date();
+
+            
+            const filteredAtendimentos = atendimentos.filter(atendimento => {
+                const atendimentoDate = new Date(atendimento.data);
+                switch (timeFilter) {
+                    case 'hora':
+                        return (
+                            atendimentoDate.toDateString() === now.toDateString() &&
+                            atendimentoDate.getHours() === now.getHours()
+                        );
+                    case 'dia':
+                        return atendimentoDate.toDateString() === now.toDateString();
+                    case 'semana':
+                        const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+                        return atendimentoDate >= startOfWeek;
+                    case 'mes':
+                        return (
+                            atendimentoDate.getMonth() === now.getMonth() &&
+                            atendimentoDate.getFullYear() === now.getFullYear()
+                        );
+                    case 'ano':
+                        return atendimentoDate.getFullYear() === now.getFullYear();
+                    default:
+                        return false;
+                }
+            });
+
+            
+            const contagem = {};
+            filteredAtendimentos.forEach(atendimento => {
+                const nome = atendimento.nomeProfissional;
+                const id = atendimento.idProfissional;
+                if (!contagem[nome]) contagem[nome] = { quantidade: 0, id };
+                contagem[nome].quantidade++;
+            });
+
+            
+            const profissionaisOrdenados = Object.entries(contagem)
+                .sort((a, b) => b[1].quantidade - a[1].quantidade)
+                .slice(0, 2); 
+
+            
+            const topProfessionalsList = document.getElementById('topProfessionalsList');
+            topProfessionalsList.innerHTML = '';
+
+            if (profissionaisOrdenados.length > 0) {
+                let resultadoHTML = '<ul style="list-style: none; padding: 0; margin: 0;">';
+                profissionaisOrdenados.forEach(([nome, { quantidade, id }]) => {
+                    resultadoHTML += `
+                        <li style="margin-bottom: 10px;">
+                            <strong>${nome.replace('ONG', 'Assistente Social')}</strong>: ${quantidade} atendimento(s)
+                            <button onclick="startChat(${id}, '${nome}')" style="margin-left: 10px; padding: 5px 10px; background-color: #ff5757; color: white; border: none; border-radius: 5px; cursor: pointer;">Ir para o Chat</button>
+                        </li>`;
+                });
+                resultadoHTML += '</ul>';
+                topProfessionalsList.innerHTML = resultadoHTML;
+            } else {
+                topProfessionalsList.innerHTML = '<p>Nenhum atendimento encontrado para o período selecionado.</p>';
+            }
+        }
+
+        loadProfessionals();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const rankingProfissionais = JSON.parse(localStorage.getItem("rankingProfissionais")) || {};
+
+            function atualizarRanking() {
+                const topProfessionalsList = document.getElementById("topProfessionalsList");
+                topProfessionalsList.innerHTML = ""; // Limpar ranking anterior
+
+                const rankingArray = Object.entries(rankingProfissionais).sort((a, b) => b[1] - a[1]);
+
+                rankingArray.forEach(([profissional, total]) => {
+                    const item = document.createElement("li");
+                    item.style.marginBottom = "10px";
+                    item.innerHTML = `
+                        <strong>${profissional}</strong>: ${total} atendimento(s)
+                    `;
+                    topProfessionalsList.appendChild(item);
+                });
+            }
+
+            const atendimentoForm = document.getElementById("atendimentoForm");
+            if (atendimentoForm) {
+                atendimentoForm.addEventListener("submit", (event) => {
+                    event.preventDefault();
+
+                    const nomeProfissional = document.getElementById("nomeProfissional").value;
+
+                    // Incrementar o contador do profissional no ranking
+                    if (!rankingProfissionais[nomeProfissional]) {
+                        rankingProfissionais[nomeProfissional] = 0;
+                    }
+                    rankingProfissionais[nomeProfissional]++;
+
+                    // Salvar no localStorage
+                    localStorage.setItem("rankingProfissionais", JSON.stringify(rankingProfissionais));
+
+                    // Atualizar o ranking na interface
+                    atualizarRanking();
+
+                    alert("Feedback registrado com sucesso!");
+                    atendimentoForm.reset();
+                });
+            }
+
+            // Atualizar o ranking ao carregar a página
+            atualizarRanking();
+        });
+    </script>
+</body>
+</html>
+

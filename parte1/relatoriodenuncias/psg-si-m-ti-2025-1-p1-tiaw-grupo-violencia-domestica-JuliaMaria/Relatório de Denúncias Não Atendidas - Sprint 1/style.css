@@ -1,0 +1,177 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f8f8f8;
+  color: #333;
+}
+
+header {
+  background-color: #fb7ec1;
+  padding: 16px 24px;
+  text-align: left;
+  color: black;
+}
+
+header h1 {
+  background: white;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+main {
+  padding: 20px;
+  max-width: 1280px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px; /* Aumenta o espaço entre cards e gráfico */
+  flex-wrap: wrap;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* duas colunas */
+  gap: 20px;
+  flex: 2;
+  min-width: 600px;
+}
+
+.topico {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.topico button {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: #fb7ec1;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.grafico-container {
+  flex: 1;
+  min-width: 320px;
+  max-width: 400px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#graficoPizza {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Responsivo */
+@media (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .grafico-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+  }
+}
+
+/* FORMULÁRIO */
+
+.formulario {
+  background: #eee;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 20px auto;
+  position: relative;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.form-buttons button {
+  padding: 10px 20px;
+  background-color: #fb7ec1;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Botão voltar */
+
+.voltar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  color: #fb7ec1;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #fb7ec1;
+  transition: all 0.3s ease;
+}
+
+.voltar:hover {
+  background-color: #fb7ec1;
+  color: white;
+}
