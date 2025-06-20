@@ -1,189 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Perfil - Escuta Amiga</title>
+
+    <!-- CSS Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="pessoas_confiaveis.css">
-    <title>Página do perfil</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+    <!-- Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script src= "app.js"></script> 
+
     <style>
-    body {
-        background-color: white;
-        color: #cb6ce6;
-    }
-    .navbar {
-        background-color: #cb6ce6;
-    }
-    .card {
-        background-color: #b6b5b5;
-        color: white;
-        border-radius: 0; /* Remove bordas arredondadas */
-         
-    }
-    .btn-primary {
-        background-color: #ff5757;
-        border-color: #ff5757;
-        border-radius: 0; /* Remove bordas arredondadas */
-    }
-    .btn-primary:hover {
-        background-color: #cb6ce6;
-        border-color: #cb6ce6;
-    }
-    .btn-light {
-        background-color: #ff5757;
-        color: rgb(17, 17, 17);
-        border-radius: 0; /* Remove bordas arredondadas */
-    }
-    .btn-light:hover {
-        background-color: #cb6ce6;
-        color: rgb(8, 8, 8);
-    }
-    h1, h2 {
-        color: #ffffff;
-        background-color: #cb6ce6;
-        padding: 10px;
-        text-align: center;
-    }
-    .relatorio-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh; /* Garante que o contêiner ocupe a altura total da página */
-    }
-</style>
-</head>
-<body>
+        /* Seu CSS personalizado - (mantive igual, apenas organizado) */
+        body {
+            background-color: white;
+            color: #cb6ce6;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.10);
+            border-radius: 0 0;
+        }
+        .navbar-logo img {
+            max-height: 70px;
+        }
+        .navbar-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #c90f0f;
+            color: white;
+        }
+
+        h1, h2 {
+            background-color: #9B59B6;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
     
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <div class="botao-container">
-                        <h4 id="relatorioCompleto">Adicionar pessoas confiáveis</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <div id="cronometro" style="position: fixed; bottom: 20px; right: 20px; background: #e6141474; padding: 10px 15px; border-radius: 8px; font-weight: bold; z-index: 1;">
-        Tempo na sessão: <span id="tempoSessao">00:00</span>
-    </div>
+        .card {
+            background-color: #9B59B6;
+            color: white;
+        }
 
-<section id="secao-2">
+        .btn-primary {
+            background-color: #ff5757;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #cb6ce6;
+        }
+        .btn-light {
+            background-color: #ff5757;
+            color: black;
+        }
+        .btn-light:hover {
+            background-color: #cb6ce6;
+        }
 
-    <div class="row row-cols-1 row-cols-md-3 g-4" id="lista-cards">
-        <div class="col">
-            <div class="card" style="background-color:#cb6ce6;">
-                <div class="card-body">
-                    <h5 class="card-title" style="color: white; text-align: center;">Pessoa Confiável 1</h5>
-                    <div style="text-align: center;">
-                        <form>
-                            <input class="input-pessoa1" id="input-nome1" type="text" placeholder="Nome" required >
-                            <input class="input-pessoa1" id="input-email1" type="text" placeholder="Email" required style="margin-top: 2vh;">
-                            <input class="input-pessoa1" id="input-telefone1" type="text" placeholder="Telefone" required style="margin-top: 2vh;">
-                            <input class="input-pessoa1" id="input-relacao1" type="text" placeholder="Relação com a vítima" required style="margin-top: 2vh;">
-                            <div class="botao-container" style="margin-bottom: 2vh;">
-                                <button id="sendBtn1" style="background-color: rgb(22, 134, 0); color: #ffffff; border: none; padding: 0.6%;border-radius: 5%;">Cadastrar</button>
-                                <button id="updateBtn1" style="background-color: rgb(240, 216, 0); color: white; border: none; padding: 0.6%; margin-left: 3%; margin-right: 3%; border-radius: 5%;">Alterar</button>
-                                <button id="deleteBtn1" style="background-color: rgb(223, 20, 20); color: white; border: none; padding: 0.6%; border-radius: 5%;">Excluir</button>
-                            </div>
-                        </form>
+        footer {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 0;
+        }
 
-                    </div>  
-                </div>
-            </div>
+        #cronometro {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #e6141474;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 999;
+        }
+        .botao-estilizado {
+  background: linear-gradient(90deg,#9B59B6 , #920505);
+  color: #fff;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(40, 40, 80, 0.13);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.botao-estilizado:hover {
+  background: linear-gradient(90deg, #9B59B6 , #920505);
+  transform: translateY(-3px) scale(1.0);
+  box-shadow: 0 8px 24px rgba(106,17,203,0.18);
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center">
+            <a href="index.html" class="navbar-logo">
+                <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+            </a>
+            <span class="navbar-title">Escuta Amiga</span>
         </div>
-        <div class="col">
-            <div class="card" style="background-color:#cb6ce6;">
-                <div class="card-body">
-                    <h5 class="card-title" style="color: white; text-align: center;">Pessoa Confiável 2</h5>
-                    <div style="text-align: center;">
-                        <form>
-                            <input class="input-pessoa2" id="input-nome2" type="text" placeholder="Nome" required >
-                            <input class="input-pessoa2" id="input-email2" type="text" placeholder="Email" required style="margin-top: 2vh;">
-                            <input class="input-pessoa2" id="input-telefone2" type="text" placeholder="Telefone" required style="margin-top: 2vh;">
-                            <input class="input-pessoa2" id="input-relacao2" type="text" placeholder="Relação com a vítima" required style="margin-top: 2vh;">
-                            <div class="botao-container" style="margin-bottom: 2vh;">
-                                <button id="sendBtn2" style="background-color: rgb(22, 134, 0); color: #ffffff; border: none; padding: 0.6%;border-radius: 5%;">Cadastrar</button>
-                                <button id="updateBtn2" style="background-color: rgb(240, 216, 0); color: white; border: none; padding: 0.6%; margin-left: 3%; margin-right: 3%; border-radius: 5%;">Alterar</button>
-                                <button id="deleteBtn2" style="background-color: rgb(223, 20, 20); color: white; border: none; padding: 0.6%; border-radius: 5%;">Excluir</button>
-                            </div>
-                            
-                        </form>
-                    </div>  
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card" style="background-color:#cb6ce6;">
-                <div class="card-body">
-                    <h5 class="card-title" style="color: white; text-align: center;">Pessoa Confiável 3</h5>
-                    <div style="text-align: center;">
-                        <form>
-                            <input class="input-pessoa3" id="input-nome3" type="text" placeholder="Nome" required >
-                            <input class="input-pessoa3" id="input-email3" type="text" placeholder="Email" required style="margin-top: 2vh;">
-                            <input class="input-pessoa3" id="input-telefone3" type="text" placeholder="Telefone" required style="margin-top: 2vh;">
-                            <input class="input-pessoa3" id="input-relacao3" type="text" placeholder="Relação com a vítima" required style="margin-top: 2vh;">
-                            <div class="botao-container" style="margin-bottom: 2vh;">
-                                <button id="sendBtn3" style="background-color: rgb(22, 134, 0); color: #ffffff; border: none; padding: 0.6%;border-radius: 5%;">Cadastrar</button>
-                                <button id="updateBtn3" style="background-color: rgb(240, 216, 0); color: white; border: none; padding: 0.6%; margin-left: 3%; margin-right: 3%; border-radius: 5%;">Alterar</button>
-                                <button id="deleteBtn3" style="background-color: rgb(223, 20, 20); color: white; border: none; padding: 0.6%; border-radius: 5%;">Excluir</button>
-                            </div>
-                            
-                        </form>
-                    </div>  
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</section>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-dark">Seu perfil</a>
-        </div>
+        <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+            <li><a href="perfil.html">Sua página</a></li>
+            <li><a href="profissional.html">Colaboradores</a></li>
+            <li><a href="quemsomos.html">Quem somos</a></li>
+            <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
     </nav>
 
-    <div class="Suas denúncias">
-        <div class="list-group m-3" id="denunciasList">
+    <!-- Título -->
+    <h2 style="background-color: #fff; color: #920505;">Adicionar Pessoas Confiáveis</h2>
+
+    <!-- Cards Pessoas Confiáveis -->
+    <div class="container my-4">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Card 1 -->
+            <div class="col">
+                <div class="card p-3">
+                    <h5 class="card-title text-center">Pessoa Confiável 1</h5>
+                    <form>
+                        <input class="form-control mb-2" id="input-nome1" type="text" placeholder="Nome">
+                        <input class="form-control mb-2" id="input-email1" type="email" placeholder="Email">
+                        <input class="form-control mb-2" id="input-telefone1" type="text" placeholder="Telefone">
+                        <input class="form-control mb-3" id="input-relacao1" type="text" placeholder="Relação">
+                        <div class="d-flex justify-content-between">
+                            <button id="sendBtn1" class="btn btn-success">Cadastrar</button>
+                            <button id="updateBtn1" class="btn btn-warning text-white">Alterar</button>
+                            <button id="deleteBtn1" class="btn btn-danger">Excluir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col">
+                <div class="card p-3">
+                    <h5 class="card-title text-center">Pessoa Confiável 2</h5>
+                    <form>
+                        <input class="form-control mb-2" id="input-nome2" type="text" placeholder="Nome">
+                        <input class="form-control mb-2" id="input-email2" type="email" placeholder="Email">
+                        <input class="form-control mb-2" id="input-telefone2" type="text" placeholder="Telefone">
+                        <input class="form-control mb-3" id="input-relacao2" type="text" placeholder="Relação">
+                        <div class="d-flex justify-content-between">
+                            <button id="sendBtn2" class="btn btn-success">Cadastrar</button>
+                            <button id="updateBtn2" class="btn btn-warning text-white">Alterar</button>
+                            <button id="deleteBtn2" class="btn btn-danger">Excluir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col">
+                <div class="card p-3">
+                    <h5 class="card-title text-center">Pessoa Confiável 3</h5>
+                    <form>
+                        <input class="form-control mb-2" id="input-nome3" type="text" placeholder="Nome">
+                        <input class="form-control mb-2" id="input-email3" type="email" placeholder="Email">
+                        <input class="form-control mb-2" id="input-telefone3" type="text" placeholder="Telefone">
+                        <input class="form-control mb-3" id="input-relacao3" type="text" placeholder="Relação">
+                        <div class="d-flex justify-content-between">
+                            <button id="sendBtn3" class="btn btn-success">Cadastrar</button>
+                            <button id="updateBtn3" class="btn btn-warning text-white">Alterar</button>
+                            <button id="deleteBtn3" class="btn btn-danger">Excluir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="cards-denuncias m-3" id="navbar">
-        <h2>Atendimentos Registrados</h2>
-        <div id="cardsContainer" class="row">
-     </div>
+    <!-- Atendimentos -->
+    <h2>Atendimentos Registrados</h2>
+    <div class="container my-4">
+        <div id="cardsContainer" class="row"></div>
     </div>
 
-    <div class="Relatório de denuncias" >
-        <h1 class="p-3" >Registrar Atendimento</h1>
-        <div class="card m-3 p-4" style="width: 100%; max-width: 40rem; margin: auto;" id="relatorio-container">
+    <!-- Formulário de Registro -->
+    <h1>Registrar Atendimento</h1>
+    <div class="container">
+        <div class="card p-4 mx-auto" style="max-width: 600px;">
             <form id="atendimentoForm">
-                <label class="p-2 m-2" for="nomeProfissional">Nome do Profissional:</label>
-                <input class="form-control" type="text" id="nomeProfissional" required>
-                <label class="p-2 m-2" for="tipoProfissional">Tipo de Profissional:</label>
-                <select class="form-control" id="tipoProfissional" required>
+                <label for="nomeProfissional" class="form-label">Nome do Profissional:</label>
+                <input type="text" class="form-control mb-2" id="nomeProfissional" required>
+
+                <label for="tipoProfissional" class="form-label">Tipo de Profissional:</label>
+                <select id="tipoProfissional" class="form-select mb-2" required>
                     <option value="advogado">Advogado</option>
                     <option value="psicologo">Psicólogo</option>
-                    <option value="ong">ONG</option>
                     <option value="assistente_social">Assistente Social</option>
-                    <option value="voluntario">Voluntário</option> 
+                    <option value="ong">ONG</option>
+                    <option value="voluntario">Voluntário</option>
                 </select>
-                <label class="p-2 m-2" for="feedback">Feedback (opcional):</label>
-                <textarea class="form-control" id="feedback" rows="5"></textarea>
-                <button class="btn btn-light mt-3" type="submit">Salvar Atendimento</button>
+
+                <label for="feedback" class="form-label">Feedback (opcional):</label>
+                <textarea id="feedback" class="form-control mb-3" rows="4"></textarea>
+
+                <button type="submit" style="align-items: center;" class="botao-estilizado">Salvar Atendimento</button>
             </form>
         </div>
     </div>
 
-    <div class="nova denuncia">
-        <div class="d-grid gap-2 col-6 mx-auto">
-            <a href="#atendimentoForm" class="btn btn-primary" role="button">Realizar nova denúncia</a>
-            <a href="profissional .html" class="btn btn-primary" role="button">Fale com nossos colaboradores</a>
-        </div>
+    <!-- Botões -->
+    <div class="container text-center my-4">
+        <a href="#atendimentoForm" class="botao-estilizado">Nova Denúncia</a>
+        <a href="profissional.html" class="botao-estilizado">Falar com Colaboradores</a>
     </div>
 
-    <script>
+    <!-- Cronômetro -->
+    <div id="cronometro">
+        Tempo na sessão: <span id="tempoSessao">00:00</span>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <!-- Footer -->
+    <footer>
+        <div class="container d-flex flex-column align-items-center">
+            <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+            <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+                <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" class="text-white text-decoration-underline">
+                    gov.br/ondemdenunciar
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Seus scripts JS ficam no final para otimizar -->
+     <script>
         const validaprofissional = [
             { id: 1, name: "Ana", type: "psicologo" },
             { id: 2, name: "Carlos", type: "psicologo" },
@@ -614,6 +689,7 @@ function criarCard(atendimento, index) {
     });
 
 </script>
+
 
 </body>
 </html>

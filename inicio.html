@@ -36,17 +36,32 @@
       margin-left: 5px;
     }
 
-    .navbar-nav .nav-link {
-      color: white !important;
-      margin-left: 20px;
-      font-size: 1rem;
-      font-weight: 500;
-    }
+     .navbar {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.10);
+            border-radius: 0 0;
+        }
+        .navbar-logo img {
+            max-height: 70px;
+        }
+        .navbar-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #c90f0f;
+            color: white;
+        }
 
-    .navbar-nav .nav-link:hover {
-      text-decoration: underline;
-      color: #ffe6ff !important;
-    }
 
     main {
       padding: 30px 20px;
@@ -69,18 +84,14 @@
       display: block;
     }
 
-    footer {
-      background-color: #ff5757;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-      margin-top: 40px;
-    }
+     footer {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 0;
+        }
 
-    footer a {
-      color: white;
-      text-decoration: underline;
-    }
 
     #map {
     width: 600px;
@@ -94,50 +105,22 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg custom-navbar">
-    <div class="container-fluid d-flex align-items-start">
-      <!-- Logo + nome do site -->
-      <div class="d-flex flex-column align-items-start me-5">
-        <a class="navbar-brand" href="index.html">
-          <img class="responsiva-img" src="imgsviolencia/LogoTiaw.png" alt="Logo Escuta Amiga" />
-        </a>
-        <span class="site-name">Escuta Amiga</span>
-      </div>
-
-      <!-- Menu -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll align-items-center">
-          <li class="nav-item">
-            <a class="nav-link destaque" href="perfil.html">Sua página</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="profissional .html">Fale com nossos colaboradores</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="quemsomos.html">Quem somos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="politicadeprivacidade.html">Política de privacidade</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="FAQ.html">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="login.html">Login</a>
-          </li>
+ <nav class="navbar d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center">
+            <a href="index.html" class="navbar-logo">
+                <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+            </a>
+            <span class="navbar-title">Escuta Amiga</span>
+        </div>
+        <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+            <li><a href="perfil.html">Sua página</a></li>
+            <li><a href="profissional.html">Colaboradores</a></li>
+            <li><a href="quemsomos.html">Quem somos</a></li>
+            <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
-        </li>
-  
-  
-      </div>
-    </div>
-    
-  </nav>
-
+    </nav>
   <div class="d-flex justify-content-end align-items-center p-3 gap-3">
   <!-- Switch modo noturno -->
   <label class="switch mb-0">
@@ -212,11 +195,16 @@
   </main>
   
   <footer>
-    <div class="container">
-      <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
-      <p>Precisa de ajuda? Ligue 180 ou acesse <a href="https://www.gov.br/mulheres/pt-br/ligue180">gov.br/ondemdenunciar</a></p>
-    </div>
-  </footer>
+  <footer>
+        <div class="container d-flex flex-column align-items-center">
+            <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+            <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+                <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" class="text-white text-decoration-underline">
+                    gov.br/ondemdenunciar
+                </a>
+            </p>
+        </div>
+    </footer>
 </body>
 <script>
   const darkToggle = document.getElementById("modonoturno");

@@ -5,12 +5,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Escuta Amiga - FAQ</title>
   <link rel="stylesheet" href="FAQ.css" />
+  <style>
+    /* --- Navbar --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: linear-gradient(90deg, #9B59B6 , #920505 );
+      box-shadow: 0 4px 16px rgba(40, 40, 80, 0.10);
+      border-radius: 0 0;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-img {
+      max-height: 70px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .navbar-title {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-left: 14px;
+      letter-spacing: 1px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      text-shadow: 0 2px 8px #f5141f;
+    }
+
+    .navbar-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar-links a {
+      color: #e0e6f7;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .navbar-links a:hover {
+      background: #c90f0f;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(106,17,203,0.10);
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: linear-gradient(90deg, #9B59B6, #920505);
+      color: white;
+      padding: 30px 0 15px 0;
+      border-radius: 0 0;
+      box-shadow: 0 -4px 16px rgba(40, 40, 80, 0.10);
+      margin-top: 40px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-info {
+      text-align: center;
+      flex: 1 1 250px;
+    }
+
+    .footer-info a {
+      color: #ffe6ff;
+      text-decoration: underline;
+    }
+
+    footer p {
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 0 10px;
+      }
+    }
+  </style>
 </head>
+
 <body onload="inicializarFAQ()">
 
-  <header class="cabecalho">
-    <h1 class="titulo">Escuta Amiga - Perguntas Frequentes</h1>
-  </header>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="navbar-logo" href="index.html">
+      <img class="navbar-img" src="LogoTiaw.png" alt="Logo Escuta Amiga" />
+    </a>
+    <span class="navbar-title">Escuta Amiga</span>
+    <ul class="navbar-links">
+      <li><a href="perfil.html">Sua página</a></li>
+      <li><a href="profissional.html">Colaboradores</a></li>
+      <li><a href="quemsomos.html">Quem somos</a></li>
+      <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+      <li><a href="FAQ.html">FAQ</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+<br>
+<br>
+ <div style="text-align: center;">
+  <h1>Escuta Amiga - Perguntas Frequentes</h1>
+</div>
+
 
   <section class="container busca-disfarce">
     <input type="text" id="busca" placeholder="Buscar pergunta..." oninput="filtrarPerguntas()" />
@@ -29,8 +149,6 @@
   <section class="container">
     <h3>Perguntas da Comunidade</h3>
     <div id="lista-comunidade">
-      <!-- Exemplo estático para referência (será gerado pelo JS) -->
-
       <div class="comunidade-item">
         <div class="comunidade-pergunta">Exemplo de pergunta da comunidade?</div>
         <p class="resposta">Resposta dada pela equipe.</p>
@@ -41,14 +159,19 @@
           <button onclick="adicionarAoFAQ(0)">Adicionar ao FAQ</button>
         </div>
       </div>
-      
     </div>
   </section>
 
-
-  <footer class="rodape">
-    <p>Escuta Amiga - Apoio voluntário a vítimas de violência doméstica</p>
-    <p>Com colaboração de ONGs, profissionais da saúde e advogados</p>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+        <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+          <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank">gov.br/ondemdenunciar</a>
+        </p>
+      </div>
+    </div>
   </footer>
 
   <script src="FAQ.js"></script>

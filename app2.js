@@ -233,7 +233,7 @@ mostrarResultados(JSON.parse(localStorage.getItem('resultados')) || []);
 const btn = document.createElement('button');
 btn.id = 'btnEnviar';
 btn.type = 'submit';
-btn.className = 'btn btn-dark';
+btn.className = 'btn-personalizado';
 btn.innerText = 'Enviar';
 
 form.appendChild(btn);

@@ -1,23 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login </title>
-  <link rel="stylesheet" href="teste.css" />
+    <meta charset="UTF-8">
+    <title>Escuta Amiga</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-  <div class="container" style="text-align:center;">
-    <h1>Escolha um Tema para Começar</h1>
-    <div style="margin-top: 40px;">
-       <li class="nav-item">
-            <a class="nav-link destaque" href="loginadmin.html">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link destaque" href="cadastroadmin.html">Cadastro</a>
-          </li>
-    </div>
-  </div>
+    <div class="container">
+        <div class="login-box">
+            <img src="LogoTiaw.png" width="200px">
 
+            <div class="login-options">
+
+                <!-- Login Denunciante -->
+                <div class="login-option">
+                    <button class="login-btn">
+                        <span>LOGIN DENUNCIANTE</span>
+                        <span class="arrow">&#9660;</span>
+                    </button>
+                    <div class="entrar-container">
+                        <button class="entrar-btn" onclick="window.location.href='login.html'">Login</button>
+                        <button class="entrar-btn" onclick="window.location.href='inicio.html'">Cadastrar</button>
+                    </div>
+                </div>
+
+                <!-- Login Administrador -->
+                <div class="login-option">
+                    <button class="login-btn">
+                        <span>LOGIN ADMINISTRADOR</span>
+                        <span class="arrow">&#9660;</span>
+                    </button>
+                    <div class="entrar-container">
+                        <button class="entrar-btn" onclick="window.location.href='loginadmin.html'">Login</button>
+                        <button class="entrar-btn" onclick="window.location.href='cadastroadmin.html'">Cadastrar</button>
+                    </div>
+                </div>
+
+                <!-- Login Profissional -->
+                <div class="login-option">
+                    <button class="login-btn">
+                        <span>LOGIN PROFISSIONAL</span>
+                        <span class="arrow">&#9660;</span>
+                    </button>
+                    <div class="entrar-container">
+                        <button class="entrar-btn" onclick="window.location.href='loginprofissional.html'">Login</button>
+                        <button class="entrar-btn" onclick="window.location.href='cadastroprofissional.html'">Cadastrar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="site-name">ESCUTA AMIGA</div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
 </body>
 </html>

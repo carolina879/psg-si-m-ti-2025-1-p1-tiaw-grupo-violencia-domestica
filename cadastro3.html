@@ -3,112 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <title>Cadastro de Denúncia - Parte 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="denuncia.css">
-    <script src="denuncia.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-
-    <title>Cadastro de Denuncia</title>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-<header>
-
-
-</header>
-    
 
 <main class="bg-light d-flex justify-content-center align-items-center min-vh-100">
-    
-        <form class="p-4 rounded bg-secondary text-white" style="max-width: 600px; width: 100%;" id="formFinal">
-          
-          
+    <form class="p-4 rounded bg-secondary text-white" style="max-width: 600px; width: 100%;" id="formFinal">
+        <h3 class="mb-4">Anexar Evidências e Confirmar</h3>
 
-      
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Anexar Arquivo de evidências</label>
+        <div class="mb-3">
+            <label class="form-label">Anexar Arquivo de Evidências</label>
             <input class="form-control" type="file" id="inputFile">
-          </div>
-      
-          <div class="form-check mb-3">
+        </div>
+
+        <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="checkboxConfirmacao">
-            <label class="form-check-label" for="formCheck">
-              Declaro que as informações fornecidas são verdadeiras
-              <br><small class="text-light">Compreendo que o fornecimento de informações falsas pode resultar em consequências legais.<br>Autorizo o uso dessas informações para investigações.</small>
+            <label class="form-check-label">
+                Declaro que as informações fornecidas são verdadeiras.
+                <br><small>Compreendo que fornecer informações falsas pode resultar em consequências legais e autorizo o uso das informações para investigação.</small>
             </label>
-          </div>
-      
-          <div class="text-center">
-            <button type="submit" class="btn btn-warning" id="btnEnviar">Enviar</button>
-          </div>
-      
-        </form>
-      
+        </div>
 
+        <div class="text-center">
+            <button type="submit" class="btn">Enviar</button>
+        </div>
+    </form>
 </main>
-</body>
-<footer>
-
-
-</footer>
-
-
-
-
 
 <script>
-  document.getElementById('formFinal').addEventListener('submit', function (event) {
-    event.preventDefault();
+    document.getElementById('formFinal').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    const confirmado = document.getElementById('checkboxConfirmacao').checked;
-    const arquivo = document.getElementById('inputFile').value;
+        const confirmado = document.getElementById('checkboxConfirmacao').checked;
+        const arquivo = document.getElementById('inputFile').value;
 
-    if (!confirmado) {
-      alert('Você precisa confirmar que as informações são verdadeiras.');
-      return;
-    }
+        if (!confirmado) {
+            alert('Você precisa confirmar que as informações são verdadeiras.');
+            return;
+        }
 
-    // Recupera os dados das etapas anteriores
-    const parte1 = JSON.parse(localStorage.getItem('denunciaParte1'));
-    const parte2 = JSON.parse(localStorage.getItem('denunciaParte2'));
+        const parte1 = JSON.parse(localStorage.getItem('denunciaParte1'));
+        const parte2 = JSON.parse(localStorage.getItem('denunciaParte2'));
 
-    if (!parte1 || !parte2) {
-      alert("Erro: informações anteriores da denúncia não foram encontradas.");
-      window.location.href = "cadastro1.html";
-      return;
-    }
+        if (!parte1 || !parte2) {
+            alert("Erro: informações anteriores da denúncia não foram encontradas.");
+            window.location.href = "cadastro1.html";
+            return;
+        }
 
-    // Monta a parte final
-    const parte3 = {
-      arquivo,
-      confirmado
-    };
+        const parte3 = { arquivo, confirmado };
 
-    // Denúncia completa
-    const denunciaCompleta = {
-      ...parte1,
-      ...parte2,
-      ...parte3,
-      situacao: "Em análise",
-      dataEnvio: new Date().toISOString()
-    };
+        const denunciaCompleta = {
+            ...parte1,
+            ...parte2,
+            ...parte3,
+            situacao: "Em análise",
+            dataEnvio: new Date().toISOString()
+        };
 
-    // Salvar no array de denúncias
-    const denuncias = JSON.parse(localStorage.getItem('denuncias')) || [];
-    denuncias.push(denunciaCompleta);
-    localStorage.setItem('denuncias', JSON.stringify(denuncias));
+        const denuncias = JSON.parse(localStorage.getItem('denuncias')) || [];
+        denuncias.push(denunciaCompleta);
+        localStorage.setItem('denuncias', JSON.stringify(denuncias));
 
-    // Limpa partes temporárias
-    localStorage.removeItem('denunciaParte1');
-    localStorage.removeItem('denunciaParte2');
+        localStorage.removeItem('denunciaParte1');
+        localStorage.removeItem('denunciaParte2');
 
-    alert('Denúncia enviada com sucesso!');
-    window.location.href = 'denuncias-feitas.html';
-  });
+        alert('Denúncia enviada com sucesso!');
+        window.location.href = 'denuncias-feitas.html';
+    });
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-<script src="scripts.js"></script>
 </body>
 </html>

@@ -260,3 +260,11 @@ img.img-fluid {
   display: block;
   margin: 0 auto; 
 }
+
+.btn-personalizado {
+  background-color: #9B59B6;
+  color: white;
+  border: none;
+}
+
+
