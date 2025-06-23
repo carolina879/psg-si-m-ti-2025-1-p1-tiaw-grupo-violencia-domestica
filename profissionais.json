@@ -1,0 +1,42 @@
+[
+  {
+    "nome": "Dra. Mariana Souza",
+    "email": "mariana.souza@exemplo.com",
+    "telefone": "+5511999999999",
+    "descricao": "Advogada especialista em direitos da mulher",
+    "estado": "SP",
+    "servico": "advocacia"
+  },
+  {
+    "nome": "ONG Vozes Livres",
+    "email": "contato@vozeslivres.org",
+    "telefone": "+5581998888888",
+    "descricao": "Abrigo temporário e apoio psicossocial",
+    "estado": "PE",
+    "servico": "abrigo"
+  },
+  {
+    "nome": "Projeto Escuta & Acolhe",
+    "email": "acolhimento@escuta.org",
+    "telefone": "+5571988776655",
+    "descricao": "Atendimento psicológico remoto e presencial",
+    "estado": "BA",
+    "servico": "psicologia"
+  },
+  {
+    "nome": "Dra. Ana Lima",
+    "email": "ana.lima@direitos.org",
+    "telefone": "+5521987654321",
+    "descricao": "Orientação jurídica para vítimas",
+    "estado": "RJ",
+    "servico": "orientacao_juridica"
+  },
+  {
+    "nome": "Centro Médico Esperança",
+    "email": "contato@medesperanca.org",
+    "telefone": "+5531981122334",
+    "descricao": "Consultas médicas gratuitas",
+    "estado": "MG",
+    "servico": "medicina"
+  }
+]

@@ -8,6 +8,26 @@
     <link rel="stylesheet" href="denuncia.css">
 </head>
 <body>
+    <style> @media (max-width: 576px) {
+            main {
+                padding: 1rem;
+                min-height: auto;
+            }
+            form {
+                padding: 1.5rem !important;
+                max-width: 100% !important;
+                border-radius: 0.5rem !important;
+            }
+            .text-center {
+                text-align: center !important;
+            }
+            button.btn {
+                width: 100%;
+                max-width: 300px;
+                padding: 10px;
+            }
+    }
+    </style>
 
 <main class="bg-light d-flex justify-content-center align-items-center min-vh-100">
     <form class="p-4 rounded bg-secondary text-white" style="max-width: 600px; width: 100%;" id="formFinal">
@@ -55,7 +75,10 @@
 
         const parte3 = { arquivo, confirmado };
 
+        const denuncias = JSON.parse(localStorage.getItem('denuncias')) || [];
+
         const denunciaCompleta = {
+            id: denuncias.length,
             ...parte1,
             ...parte2,
             ...parte3,
@@ -63,15 +86,16 @@
             dataEnvio: new Date().toISOString()
         };
 
-        const denuncias = JSON.parse(localStorage.getItem('denuncias')) || [];
         denuncias.push(denunciaCompleta);
+        localStorage.setItem('denuncias', JSON.stringify(denuncias));
+
         localStorage.setItem('denuncias', JSON.stringify(denuncias));
 
         localStorage.removeItem('denunciaParte1');
         localStorage.removeItem('denunciaParte2');
 
         alert('Denúncia enviada com sucesso!');
-        window.location.href = 'denuncias-feitas.html';
+        window.location.href = 'inicio.html';
     });
 </script>
 

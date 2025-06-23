@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escolha o Tema</title>
+  <link rel="stylesheet" href="botaodisfarce.css" />
+</head>
+<body>
+      <div class="d-flex justify-content-between align-items-center p-3">
+    <button class="btn btn-voltar" onclick="history.back()">&#8592; Voltar</button>
+    </div>
+  <div class="container" style="text-align:center;">
+    <h1>Escolha um Tema para Começar</h1>
+    <div style="margin-top: 40px;">
+      <button class="btn" onclick="escolher('culinaria')">🍽 Culinária</button>
+      <button class="btn" onclick="escolher('noticias')">📰 Notícias</button>
+      <button class="btn" onclick="escolher('viagens')">✈️ Viagens</button>
+    </div>
+  </div>
+
+  <script>
+    function escolher(modo) {
+      localStorage.setItem("modoSelecionado", modo);
+      window.location.href = "botaodisfarce.html";
+    }
+  </script>
+
+
+</body>
+</html>

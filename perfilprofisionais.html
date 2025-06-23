@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Escuta Amiga - Perfis Profissionais</title>
+  <link rel="stylesheet" href="perfilprofissionais.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav class="navbar d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center">
+            <a href="escolha.html" class="navbar-logo"title="Disfarce a página">
+                <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+            </a>
+            <span class="navbar-title">Escuta Amiga</span>
+        </div>
+        <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+          <li><a href="inicio.html">Início</a></li>
+            <li id="liPerfil"><a href="perfil.html">Sua página</a></li>
+            <li><a href="profissional.html">Colaboradores</a></li>
+            <li><a href="quemsomos.html">Quem somos</a></li>
+            <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li id="liLogin"><a href="login.html" onclick="apagaUsuarioCorrente()">Login</a></li>
+        </ul>
+    </nav>  
+
+  <section class="filtros">
+    <h2>Filtrar Perfis</h2>
+    <select id="filtroEstado" aria-label="Filtro por estado">
+      <option value="">Todos os Estados</option>
+      <option value="AC">Acre</option>
+      <option value="AL">Alagoas</option>
+      <option value="AP">Amapá</option>
+      <option value="AM">Amazonas</option>
+      <option value="BA">Bahia</option>
+      <option value="CE">Ceará</option>
+      <option value="DF">Distrito Federal</option>
+      <option value="ES">Espírito Santo</option>
+      <option value="GO">Goiás</option>
+      <option value="MA">Maranhão</option>
+      <option value="MT">Mato Grosso</option>
+      <option value="MS">Mato Grosso do Sul</option>
+      <option value="MG">Minas Gerais</option>
+      <option value="PA">Pará</option>
+      <option value="PB">Paraíba</option>
+      <option value="PR">Paraná</option>
+      <option value="PE">Pernambuco</option>
+      <option value="PI">Piauí</option>
+      <option value="RJ">Rio de Janeiro</option>
+      <option value="RN">Rio Grande do Norte</option>
+      <option value="RS">Rio Grande do Sul</option>
+      <option value="RO">Rondônia</option>
+      <option value="RR">Roraima</option>
+      <option value="SC">Santa Catarina</option>
+      <option value="SP">São Paulo</option>
+      <option value="SE">Sergipe</option>
+      <option value="TO">Tocantins</option>
+    </select>
+
+    <select id="filtroServico" aria-label="Filtro por serviço">
+      <option value="">Todos os Serviços</option>
+      <option value="advocacia">Advocacia</option>
+      <option value="psicologia">Psicologia</option>
+      <option value="abrigo">Abrigo Temporário</option>
+      <option value="assistencia_social">Assistência Social</option>
+      <option value="acolhimento">Acolhimento Emocional</option>
+      <option value="medicina">Atendimento Médico</option>
+      <option value="educacao">Educação e Conscientização</option>
+      <option value="orientacao_juridica">Orientação Jurídica</option>
+    </select>
+
+    <button type="button" onclick="aplicarFiltro()">Aplicar Filtro</button>
+  </section>
+
+  <main id="cardsContainer" aria-live="polite" aria-label="Lista de perfis profissionais">
+
+  </main>
+
+  <section>
+    <h2>Relatório de Denúncias Não Atendidas</h2>
+    <div class="container">
+      <div class="card-grid" id="lista-denuncias" aria-label="Lista de denúncias não atendidas"></div>
+      <div class="grafico-container" aria-label="Gráfico de pizza de denúncias não atendidas">
+        <canvas id="graficoPizza" role="img" aria-label="Gráfico de pizza de denúncias não atendidas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+  <div class="footer-container">
+    <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+    <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+      <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" rel="noopener noreferrer">
+        gov.br/ondemdenunciar
+      </a>
+    </p>
+  </div>
+</footer>
+
+  <script src="perfilprofissionais.js"></script>
+</body>
+</html>

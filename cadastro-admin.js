@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const administrador = { nome, email, usuario, senha };
+    const administrador = { nome, email, usuario, senha, 'adm' : true };
     localStorage.setItem('administrador', JSON.stringify(administrador));
 
     alert('Cadastro realizado com sucesso!');

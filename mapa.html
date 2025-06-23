@@ -48,14 +48,13 @@
 
     const bairros = window.bairrosBH;
 
-    // Coordenadas exatas da Delegacia Especializada da Mulher no Barro Preto (Rua Juiz de Fora 541)
+    
     const delegaciaMulher = {
         name: "Delegacia Especializada da Mulher",
         lat: -19.924210,
         lng: -43.950130
     };
 
-    // Cria uma delegacia para cada bairro listado
     var policeStations = Object.entries(bairros).map(([bairro, coords]) => ({
         name: `Delegacia ${bairro.charAt(0).toUpperCase() + bairro.slice(1)}`,
         lat: coords.lat,
@@ -63,7 +62,6 @@
         isMulher: false
     }));
 
-    // Adiciona a delegacia da mulher com marcador vermelho
     policeStations.push({
         name: "Delegacia Especializada da Mulher",
         lat: delegaciaMulher.lat,
@@ -84,7 +82,7 @@
 
         policeStations.forEach(station => {
             if (!center || isNearby(station, center)) {
-                // Se for a delegacia da mulher, marcador vermelho
+       
                 if (station.isMulher) {
                     const redIcon = L.icon({
                         iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",

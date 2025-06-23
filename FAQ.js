@@ -1,4 +1,4 @@
-// Perguntas frequentes fixas
+
 const dadosFAQ = [
   {
     pergunta: "Como posso fazer uma denúncia anônima?",
@@ -22,13 +22,11 @@ const dadosFAQ = [
   }
 ];
 
-// Inicialização geral da página
 function inicializarFAQ() {
   carregarFAQ();
   carregarPerguntasComunidade();
 }
 
-// Carrega as perguntas frequentes
 function carregarFAQ() {
   const container = document.getElementById("faq-container");
   container.innerHTML = "";
@@ -48,13 +46,11 @@ function carregarFAQ() {
   });
 }
 
-// Exibe ou oculta a resposta da FAQ
 function toggleResposta(id) {
   const resposta = document.getElementById(id);
   resposta.style.display = resposta.style.display === "none" ? "block" : "none";
 }
 
-// Filtra as perguntas frequentes com base na pesquisa
 function filtrarPerguntas() {
   const termo = document.getElementById("busca").value.toLowerCase();
   const container = document.getElementById("faq-container");
@@ -85,7 +81,6 @@ function filtrarPerguntas() {
   });
 }
 
-// Envio de perguntas da comunidade
 function enviarPergunta(event) {
   event.preventDefault();
   const novaPergunta = document.getElementById("novaPergunta").value.trim();
@@ -100,7 +95,6 @@ function enviarPergunta(event) {
   carregarPerguntasComunidade();
 }
 
-// Carrega perguntas enviadas pela comunidade com resposta e ações
 function carregarPerguntasComunidade() {
   const perguntas = JSON.parse(localStorage.getItem("perguntasComunidade")) || [];
   const container = document.getElementById("lista-comunidade");
@@ -138,7 +132,6 @@ function carregarPerguntasComunidade() {
   });
 }
 
-// Salvar resposta à pergunta
 function responderPergunta(index, btn) {
   const textarea = btn.parentElement.previousElementSibling;
   const resposta = textarea.value.trim();
@@ -151,7 +144,6 @@ function responderPergunta(index, btn) {
   carregarPerguntasComunidade();
 }
 
-// Excluir pergunta
 function excluirPergunta(index) {
   if (!confirm("Tem certeza que deseja excluir esta pergunta?")) return;
 
@@ -162,7 +154,6 @@ function excluirPergunta(index) {
   carregarPerguntasComunidade();
 }
 
-// Editar pergunta da comunidade
 function editarPergunta(index) {
   let perguntas = JSON.parse(localStorage.getItem("perguntasComunidade")) || [];
   const novaPergunta = prompt("Edite a pergunta:", perguntas[index].pergunta);
@@ -173,7 +164,6 @@ function editarPergunta(index) {
   }
 }
 
-// Adicionar pergunta da comunidade ao FAQ fixo
 function adicionarAoFAQ(index) {
   let perguntas = JSON.parse(localStorage.getItem("perguntasComunidade")) || [];
   const item = perguntas[index];

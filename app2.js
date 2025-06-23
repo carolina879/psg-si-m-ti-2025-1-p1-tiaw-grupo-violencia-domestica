@@ -142,7 +142,7 @@ questionario.perguntas.forEach(pergunta => {
 });
 
 function salvarRespostas(event) {
-  event.preventDefault(); // previne refresh da página ao enviar
+  event.preventDefault();
 
   const respostas = [];
   let pontuacaoTotal = 0;
@@ -180,7 +180,6 @@ function salvarRespostas(event) {
   mostrarAvaliacao(resultadoAtual);
   mostrarResultados(resultados);
 
-  // Opcional: limpar respostas depois de enviar
   form.reset();
 }
 
@@ -198,12 +197,12 @@ function mostrarAvaliacao(resultado) {
 
 function mostrarResultados(resultados) {
   resultadosElem.innerHTML = '';
-  // Mostra os 4 últimos resultados, do mais recente para o mais antigo
+ 
   resultados.slice(-4).reverse().forEach((resultado, idx, arr) => {
     const card = document.createElement('div');
     card.className = 'card-resultado';
 
-    // Índice real no array de resultados (considerando o slice e reverse)
+
     const realIndex = resultados.length - 1 - idx;
 
     card.innerHTML = `
@@ -216,7 +215,6 @@ function mostrarResultados(resultados) {
     resultadosElem.appendChild(card);
   });
 
-  // Adiciona evento para todos os botões de excluir
   document.querySelectorAll('.btn-excluir-card').forEach(btn => {
     btn.onclick = function() {
       const index = Number(this.getAttribute('data-index'));

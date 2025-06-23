@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
       senha === administrador.senha
     ) {
       alert('Login realizado com sucesso!');
+      const usuarioCorrente = administrador;
+      sessionStorage.setItem('usuarioCorrente', JSON.stringify(administrador));
       
       
-      window.location.href = 'painel.html'; 
+      window.location.href = 'inicio.html'; 
     } else {
       alert('Usuário ou senha incorretos!');
     }

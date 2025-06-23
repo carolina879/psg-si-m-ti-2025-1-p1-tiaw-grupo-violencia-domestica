@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Denúncias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+  
+        .navbar {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
+        }
+        .navbar-logo img {
+            max-height: 70px;
+        }
+        .navbar-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #c90f0f;
+        }
+
+
+        header {
+            background-color: #dc3545;
+            color: white;
+            padding: 20px 0;
+            border-bottom: 4px solid #a71d2a;
+        }
+        #titulo-header {
+            font-weight: bold;
+        }
+        #config {
+            color: white;
+            text-decoration: none;
+            float: right;
+            margin-top: 10px;
+        }
+        #config:hover {
+            text-decoration: underline;
+        }
+
+        #msg-adm{
+            text-align: center;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+        }
+        footer a {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar d-flex align-items-center justify-content-between px-4">
+    <div class="d-flex align-items-center">
+        <a href="escolha.html" class="navbar-logo"title="Disfarce a página">
+                <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+            </a>
+        <span class="navbar-title">Escuta Amiga</span>
+    </div>
+    <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+        <li><a href="inicio.html">Início</a></li>
+        <li id="liPerfil"><a href="perfil.html">Sua página</a></li>
+        <li><a href="profissional.html">Colaboradores</a></li>
+        <li><a href="quemsomos.html">Quem somos</a></li>
+        <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</nav>
+
+<div id="tela"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<footer>
+    <div class="container d-flex flex-column align-items-center">
+        <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+        <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+            <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank">
+                gov.br/ondemdenunciar
+            </a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    
+
+
+    function gerarRelatorio() {
+        const dataFiltro = document.getElementById("input-periodo").value;
+        const localFiltro = document.getElementById("input-local").value.toLowerCase();
+        const tipoFiltro = document.getElementById("tipo-violencia").value.toLowerCase();
+
+        const denuncias = JSON.parse(localStorage.getItem("denuncias")) || [];
+
+        const filtradas = denuncias.filter((denuncia) => {
+            const dataMatch = !dataFiltro || denuncia.data === dataFiltro;
+            const localMatch = !localFiltro || denuncia.local.toLowerCase().includes(localFiltro);
+            const tipoMatch = !tipoFiltro || denuncia.violencia.toLowerCase() === tipoFiltro;
+            return dataMatch && localMatch && tipoMatch;
+        });
+
+        atualizarTabela(filtradas);
+        atualizarCards(filtradas);
+    }
+
+    function atualizarTabela(denuncias) {
+        const tbody = document.querySelector("#minhaTabela tbody");
+        tbody.innerHTML = "";
+
+        if (denuncias.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center">Nenhuma denúncia encontrada com os filtros selecionados.</td></tr>`;
+            return;
+        }
+
+        denuncias.forEach((denuncia, index) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+
+                <td><a class="link-denuncias" href="detalhes.html?id=${index + 1}">#${String(index + 1).padStart(2, '0')}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${index + 1}">${denuncia.data}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${index + 1}">${denuncia.local}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${index + 1}">${capitalizar(denuncia.violencia)}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${index + 1}">Em análise</a></td>
+                <td><button class="btn btn-danger btn-sm btn-excluir" data-index="${index}">Excluir</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+    }
+
+</script>
+
+<script>
+    const denuncias = JSON.parse(localStorage.getItem("denuncias")) || [];
+
+    
+      
+        let params = new URLSearchParams(location.search)
+        let id = params.get('id')
+        denuncia = denuncias.find (function (elem) {return elem.id == id})
+        if (denuncia) {
+            tela.innerHTML = `
+                                <h1 style="text-align: center;>Detalhes da denúncia</h1>
+                                <div style="width: 100%; display: flex; justify-content: center; margin: 0.1rem 0;">
+                                    <hr style="width: 80%; max-width: 900px; border: 2px solid rgb(81,0,0);">
+                                </div>
+                                <div id="img-container"><img id=filme-detalhe src="${denuncia.arquivo}"></div> <br>
+                                <div style="width: 100%; display: flex; justify-content: center; margin: 0.1rem 0;">
+                                    <hr style="width: 80%; max-width: 900px; border: 2px solid rgb(81,0,0);">
+                                </div>
+                                <div id="info-filme" style="text-align: center; justify-content: center; margin: 0px 200px;"
+                                    <p>Data da ocorrência: ${denuncia.titulo} <br>
+                                    <p>Data da ocorrência: ${denuncia.data} <br>
+                                    <p>Data de envio: ${denuncia.data} <br>
+                                    <strong>Nome: ${denuncia.nome}</strong><br>
+                                    <strong>Email: ${denuncia.email}</strong><br>
+                                    <strong>Telefone para contato: ${denuncia.telefone}</strong><br>
+                                    <strong>Testemunhas: ${denuncia.testemunhas}</strong><br>
+                                    <strong>Local da ocorrência: ${denuncia.local}</strong><br>
+                                    <strong>Tipo de violência: ${denuncia.violencia}</strong><br>
+                                    <strong>Descrição: </strong>${denuncia.descricao}<br>
+                                </div>`
+        }
+        else {
+            tela.innerHTML = `Denúncia não encontrada.`
+        }
+        
+
+        
+
+</script>
+</body>
+</html>

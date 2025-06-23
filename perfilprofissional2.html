@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Denúncias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
+        }
+        .navbar-logo img {
+            max-height: 70px;
+        }
+        .navbar-title {
+            color: white;
+            font-size: 1.8rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .navbar-links a:hover {
+            background-color: #c90f0f;
+        }
+
+        header {
+            background-color: #dc3545;
+            color: white;
+            padding: 20px 0;
+            border-bottom: 4px solid #a71d2a;
+        }
+        #titulo-header {
+            font-weight: bold;
+        }
+        #config {
+            color: white;
+            text-decoration: none;
+            float: right;
+            margin-top: 10px;
+        }
+        #config:hover {
+            text-decoration: underline;
+        }
+
+        #msg-adm{
+            text-align: center;
+        }
+
+        .botao-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #botao-relatorio {
+            background:#9B59B6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #botao-relatorio:hover {
+            background-color: #9423c0;
+        }
+        input[type="date"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+        h3 {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: none;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-title {
+            color: #000000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .card-body p {
+            margin: 0;
+            color: #333;
+            font-weight: 500;
+        }
+
+        #tabela-wrapper {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background:#9B59B6;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .link-denuncias{
+            text-decoration: none;
+            color: black;
+        }
+        td {
+            color: #333;
+        }
+
+        #cronometro {
+            background-color: rgba(220, 53, 69, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+        }
+        footer a {
+            color: white;
+        }
+
+        
+img.img-fluid {
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+}
+.responsiva-img {
+  width: 100%;
+  max-width: 600px; 
+  height: auto;
+  display: block;
+  margin: 0 auto; 
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3700b3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+.dark-mode a,
+.dark-mode .nav-link {
+  color: #f5f5f5 !important;
+}
+
+.dark-mode .custom-navbar {
+  background-color: #3700b3 !important;
+}
+
+.dark-mode footer {
+  background-color: #1f1f1f !important;
+  color: #ccc;
+}
+
+
+.large-font p,
+.large-font li,
+.large-font a,
+.large-font h1,
+.large-font h2,
+.large-font h3,
+.large-font h4,
+.large-font h5,
+.large-font span,
+.large-font tr,
+.large-font td,
+.large-font #msg-adm,
+.large-font #msg-relatorio,
+.large-font input,
+.large-font select,
+.large-font label,
+.large-font button {
+  font-size: 1.5em !important;
+}
+
+#questionario {
+  background-color: #ff5757;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+}
+
+.dark-mode h3  {
+  color: #fff !important;
+}
+
+.dark-mode h3  {
+  color: #fff !important;
+}
+
+.dark-mode .link-denuncias  {
+  color: black !important;
+}
+
+.dark-mode #botaodenuncia:hover {
+  background-color: #2c0092;
+  color: #fff;
+}
+
+#questionario:hover {
+  background-color: #ff7373;
+  color: #fff;
+}
+
+.dark-mode #questionario {
+  background-color: #3700b3;
+  color: #fff;
+}
+
+.dark-mode #questionario:hover {
+  background-color: #2c0092;
+  color: #fff;
+}
+.dark-mode main h1 {
+  color: #ff7373;
+  border-left-color: #3700b3; 
+}
+
+.dark-mode main h2 {
+  color: #ff7373;
+  border-left-color: #3700b3; 
+}
+
+.destaque:hover {
+  background-color: #ff69b4; 
+  color: white !important;   
+}
+
+.dark-mode .destaque:hover {
+  background-color: #2c0092; 
+  color: white !important;   
+}
+.dark-mode .secao-com-imagem-lateral img {
+  background-color: #fff;      
+  padding: 12px;               
+  border-radius: 12px;          
+}
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  flex: 2;
+  min-width: 600px;
+}
+.topico {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
+  position: relative;
+  border-radius: 8px;
+}
+.topico button {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: #fb7ec1;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+.grafico-container {
+  min-width: 320px;
+  max-width: 50%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center !important; 
+  margin-top: 2rem;
+  margin: 2rem auto; 
+
+}
+
+#graficoPizza {
+  width: 100% !important;
+  height: auto !important;
+}
+
+@media (max-width: 1000px) {
+
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-width: unset;
+  }
+
+  .grafico-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+  }
+}
+    </style>
+</head>
+<body>
+
+<nav class="navbar d-flex align-items-center justify-content-between px-4">
+    <div class="d-flex align-items-center">
+        <a href="inicio.html" class="navbar-logo">
+            <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+        </a>
+        <span class="navbar-title">Escuta Amiga</span>
+    </div>
+    <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+        <li><a href="profissional.html">Colaboradores</a></li>
+        <li><a href="quemsomos.html">Quem somos</a></li>
+        <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+    </ul>
+</nav>
+
+  <div class="d-flex justify-content-end align-items-center p-3 gap-3">
+
+  <label class="switch mb-0">
+    <input type="checkbox" id="modonoturno" />
+    <span class="slider round"></span>
+  </label>
+  <span style="color: #333;"></span>
+
+  <img id="fonteacessivel" 
+     src="imgsviolencia/aces1.png" 
+     alt="Acessibilidade" 
+     title="Acessibilidade" 
+     style="cursor: pointer; width: 40px; height: 40px;" />
+</div>
+
+<div id="cronometro">
+    Tempo na sessão: <span id="tempoSessao">00:00</span>
+</div>
+
+
+    <div id="msg-adm">
+        <h2>Bem-vindo(a), Profissional!</h2>
+    </div>
+
+<div class="container" id="teste">
+    <h2 class="text-center my-4" id="msg-relatorio" >Relatório de Denúncias</h2>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Período:</h3>
+            <input id="input-periodo" type="date">
+        </div>
+        <div class="col-md-4">
+            <h3>Localização:</h3>
+            <input id="input-local" type="text" placeholder="Cidade ou estado">
+        </div>
+        <div class="col-md-4">
+            <h3>Tipo:</h3>
+            <select id="tipo-violencia">
+                <option value="">Tipo de violência</option>
+                <option value="fisica">Física</option>
+                <option value="sexual">Sexual</option>
+                <option value="psicologica">Psicológica</option>
+                <option value="moral">Moral</option>
+                <option value="patrimonial">Patrimonial</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row row-cols-md-2 row-cols-lg-4 g-3 mt-4" id="lista-cards">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total de denúncias</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Distribuição tipo de violência</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Distribuição por UF</h5> 
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Denúncias por período</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="botao-container">
+        <button id="botao-relatorio">Gerar relatório</button>
+    </div>
+
+    <div id="tabela-wrapper">
+        <table id="minhaTabela">
+            <thead>
+                <tr>
+                    <th>CÓDIGO</th>
+                    <th>DATA</th>
+                    <th>LOCAL</th>
+                    <th>TIPO</th>
+                    <th>SITUAÇÃO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#01</td>
+                    <td>18/05/2025</td>
+                    <td>Belo Horizonte</td>
+                    <td>Patrimonial</td>
+                    <td>Encaminhada</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+ <section>
+    <h2 style="text-align: center;">Gráfico de denúncias</h2>
+    <div class="container">
+      <div class="card-grid" id="lista-denuncias" aria-label="Lista de denúncias não atendidas"></div>
+      <div class="grafico-container" aria-label="Gráfico de pizza de denúncias não atendidas">
+        <canvas id="graficoPizza" role="img" aria-label="Gráfico de pizza de denúncias não atendidas"></canvas>
+      </div>
+    </div>
+  </section>
+
+<footer>
+    <div class="container d-flex flex-column align-items-center">
+        <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
+        <p>Precisa de ajuda? Ligue <strong>180</strong> ou acesse 
+            <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank">
+                gov.br/ondemdenunciar
+            </a>
+        </p>
+    </div>
+</footer>
+
+<script>
+      const darkToggle = document.getElementById("modonoturno");
+  const fontBtn = document.getElementById("fonteacessivel");
+
+  function updateFontIcon(darkMode) {
+    fontBtn.src = darkMode 
+      ? "imgsviolencia/aces2.png" 
+      : "imgsviolencia/aces1.png";
+  }
+
+     window.onload = () => {
+    const darkMode = localStorage.getItem("darkMode") === "true";
+    const largeFont = localStorage.getItem("largeFont") === "true";
+
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      darkToggle.checked = true;
+    }
+
+    if (largeFont) {
+      document.body.classList.add("large-font");
+    }
+
+    updateFontIcon(darkMode);
+  };
+
+  darkToggle.addEventListener("change", function () {
+    const isDark = this.checked;
+    document.body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("darkMode", isDark);
+    updateFontIcon(isDark);
+  });
+
+  fontBtn.addEventListener("click", function () {
+    const isLarge = document.body.classList.toggle("large-font");
+    localStorage.setItem("largeFont", isLarge);
+  });
+
+
+
+
+
+    let segundos = 0;
+
+    function atualizarCronometro() {
+        segundos++;
+        const minutos = Math.floor(segundos / 60);
+        const restoSegundos = segundos % 60;
+        const formato = 
+            String(minutos).padStart(2, '0') + ':' + 
+            String(restoSegundos).padStart(2, '0');
+        document.getElementById('tempoSessao').textContent = formato;
+    }
+    setInterval(atualizarCronometro, 1000);
+
+    document.getElementById("botao-relatorio").addEventListener("click", gerarRelatorio);
+
+    function gerarRelatorio() {
+        const dataFiltro = document.getElementById("input-periodo").value;
+        const localFiltro = document.getElementById("input-local").value.toLowerCase();
+        const tipoFiltro = document.getElementById("tipo-violencia").value.toLowerCase();
+
+        const denuncias = JSON.parse(localStorage.getItem("denuncias")) || [];
+
+        const filtradas = denuncias.filter((denuncia) => {
+            const dataMatch = !dataFiltro || denuncia.data === dataFiltro;
+            const localMatch = !localFiltro || denuncia.local.toLowerCase().includes(localFiltro);
+            const tipoMatch = !tipoFiltro || denuncia.violencia.toLowerCase() === tipoFiltro;
+            return dataMatch && localMatch && tipoMatch;
+        });
+
+        atualizarTabela(filtradas);
+        atualizarCards(filtradas);
+    }
+
+    function atualizarTabela(denuncias) {
+        const tbody = document.querySelector("#minhaTabela tbody");
+        tbody.innerHTML = "";
+
+        if (denuncias.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center">Nenhuma denúncia encontrada com os filtros selecionados.</td></tr>`;
+            return;
+        }
+
+        denuncias.forEach((denuncia, index) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+
+                <td><a class="link-denuncias" href="detalhes.html?id=${denuncia.id}">#${String(denuncia.id).padStart(2, '0')}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${denuncia.id}">${denuncia.data}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${denuncia.id}">${denuncia.local}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${denuncia.id}">${capitalizar(denuncia.violencia)}</a></td>
+                <td><a class="link-denuncias" href="detalhes.html?id=${denuncia.id}">Em análise</a></td>
+                <td><button class="btn btn-danger btn-sm btn-excluir" data-index="${index}">Excluir</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.querySelectorAll(".btn-excluir").forEach(button => {
+            button.addEventListener("click", (e) => {
+                const idx = Number(e.target.getAttribute("data-index"));
+                excluirDenuncia(idx);
+            });
+        });
+    }
+
+    function excluirDenuncia(index) {
+       
+        let denuncias = JSON.parse(localStorage.getItem("denuncias")) || [];
+
+        const dataFiltro = document.getElementById("input-periodo").value;
+        const localFiltro = document.getElementById("input-local").value.toLowerCase();
+        const tipoFiltro = document.getElementById("tipo-violencia").value.toLowerCase();
+
+        const filtradas = denuncias.filter((denuncia) => {
+            const dataMatch = !dataFiltro || denuncia.data === dataFiltro;
+            const localMatch = !localFiltro || denuncia.local.toLowerCase().includes(localFiltro);
+            const tipoMatch = !tipoFiltro || denuncia.violencia.toLowerCase() === tipoFiltro;
+            return dataMatch && localMatch && tipoMatch;
+        });
+
+        const denunciaParaExcluir = filtradas[index];
+        if (!denunciaParaExcluir) return;
+
+        denuncias = denuncias.filter(d => d !== denunciaParaExcluir);
+
+        localStorage.setItem("denuncias", JSON.stringify(denuncias));
+
+        gerarRelatorio();
+    }
+
+    function atualizarCards(denuncias) {
+
+        document.querySelectorAll(".card")[0].querySelector(".card-body").innerHTML = `
+            <h5 class="card-title">Total de denúncias</h5>
+            <p>${denuncias.length}</p>
+        `;
+
+        const tipos = {};
+        denuncias.forEach(d => {
+            const tipo = capitalizar(d.violencia);
+            tipos[tipo] = (tipos[tipo] || 0) + 1;
+        });
+        const tipoHtml = Object.entries(tipos).map(([k, v]) => `<p>${k}: ${v}</p>`).join('');
+        document.querySelectorAll(".card")[1].querySelector(".card-body").innerHTML = `
+            <h5 class="card-title">Distribuição por tipo de violência</h5>
+            ${tipoHtml || "<p>Nenhuma</p>"}
+        `;
+
+
+        const estados = new Set();
+        denuncias.forEach(d => {
+            const palavras = d.local.split(" ");
+            const estado = palavras[palavras.length - 1];
+            estados.add(estado.toUpperCase());
+        });
+        document.querySelectorAll(".card")[2].querySelector(".card-body").innerHTML = `
+            <h5 class="card-title">Distribuição por UF</h5>
+            <p>${estados.size} estado(s)</p>
+        `;
+
+        const porData = {};
+        denuncias.forEach(d => {
+            porData[d.data] = (porData[d.data] || 0) + 1;
+        });
+        const dataHtml = Object.entries(porData).map(([d, v]) => `<p>${d}: ${v}</p>`).join('');
+        document.querySelectorAll(".card")[3].querySelector(".card-body").innerHTML = `
+            <h5 class="card-title">Denúncias por período</h5>
+            ${dataHtml || "<p>--</p>"}
+        `;
+    }
+
+    function capitalizar(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        if (!localStorage.getItem("denuncias")) {
+      
+            const demo = [
+                { data: "2025-05-18", local: "Belo Horizonte MG", violencia: "patrimonial" },
+                { data: "2025-05-20", local: "São Paulo SP", violencia: "fisica" },
+                { data: "2025-06-10", local: "Rio de Janeiro RJ", violencia: "sexual" },
+            ];
+            localStorage.setItem("denuncias", JSON.stringify(demo));
+        }
+        gerarRelatorio();
+    });
+</script>
+
+<script>
+
+const cardsContainer = document.getElementById("cardsContainer");
+let profissionais = [];
+
+
+async function carregarDados() {
+  try {
+    const resposta = await fetch("perfilprofissionais.json");
+    const dadosJSON = await resposta.json();
+    profissionais = dadosJSON;
+
+    
+    localStorage.setItem("profissionais", JSON.stringify(profissionais));
+
+    renderizarCards(profissionais);
+  } catch (erro) {
+    console.error("Erro ao carregar perfilprofissionais.json:", erro);
+    cardsContainer.innerHTML = "<p>Erro ao carregar dados. Tente novamente mais tarde.</p>";
+  }
+}
+
+function renderizarCards(lista) {
+  cardsContainer.innerHTML = "";
+  if (lista.length === 0) {
+    cardsContainer.innerHTML = "<p>Nenhum profissional encontrado com os filtros selecionados.</p>";
+    return;
+  }
+
+  lista.forEach(p => {
+    const card = document.createElement("section");
+    card.className = "profile-card";
+
+    const whatsappLink = `https://wa.me/${p.telefone.replace(/\D/g, '')}?text=Olá%20${encodeURIComponent(p.nome)},%20vim%20pelo%20site%20Escuta%20Amiga.`;
+    const emailLink = `mailto:${p.email}?subject=Contato%20via%20Escuta%20Amiga`;
+
+    card.innerHTML = `
+      <h2>${p.nome}</h2>
+      <p>${p.descricao}</p>
+      <button onclick="toggleDetails(this)">Ver mais</button>
+      <div class="details" style="display:none;">
+        <p><strong>Email:</strong> <a href="${emailLink}">${p.email}</a></p>
+        <p><strong>Telefone:</strong> <a href="${whatsappLink}" target="_blank">${p.telefone}</a></p>
+        <p><strong>Estado:</strong> ${p.estado}</p>
+        <p><strong>Serviço:</strong> ${traduzirServico(p.servico)}</p>
+        <a class="contact-btn" href="${whatsappLink}" target="_blank">Entrar em Contato</a>
+      </div>
+    `;
+    cardsContainer.appendChild(card);
+  });
+}
+
+function traduzirServico(servico) {
+  const mapa = {
+    advocacia: "Advocacia",
+    psicologia: "Psicologia",
+    abrigo: "Abrigo Temporário",
+    assistencia_social: "Assistência Social",
+    acolhimento: "Acolhimento Emocional",
+    medicina: "Atendimento Médico",
+    educacao: "Educação e Conscientização",
+    orientacao_juridica: "Orientação Jurídica"
+  };
+  return mapa[servico] || servico;
+}
+
+function toggleDetails(button) {
+  const details = button.nextElementSibling;
+  const isOpen = details.style.display === "block";
+  details.style.display = isOpen ? "none" : "block";
+  button.textContent = isOpen ? "Ver mais" : "Ver menos";
+}
+
+function aplicarFiltro() {
+  const estado = document.getElementById("filtroEstado").value;
+  const servico = document.getElementById("filtroServico").value;
+
+  const filtrado = profissionais.filter(p =>
+    (estado === "" || p.estado === estado) &&
+    (servico === "" || p.servico === servico)
+  );
+
+  renderizarCards(filtrado);
+}
+
+const STORAGE_KEY = 'denuncias';
+
+const denunciasIniciais = [
+  { id: 1, tipo: "Violência Física", estado: "Pendente", data: "2025-05-15", orgao: "Polícia", motivo: "Falta de provas", proximosPassos: "Aguardando resposta", comentarios: "Nenhum comentário no momento." },
+  { id: 2, tipo: "Violência Psicológica", estado: "Em análise", data: "2025-05-14", orgao: "Delegacia da Mulher", motivo: "Recusa da vítima", proximosPassos: "Contato com vítima", comentarios: "Contato agendado." },
+  { id: 3, tipo: "Violência Sexual", estado: "Pendente", data: "2025-05-13", orgao: "Polícia", motivo: "Investigação em andamento", proximosPassos: "Coleta de provas", comentarios: "Testemunhas aguardando depoimento." },
+  { id: 4, tipo: "Violência Patrimonial", estado: "Pendente", data: "2025-05-12", orgao: "Delegacia", motivo: "Documento incompleto", proximosPassos: "Contato com vítima", comentarios: "Sem novos comentários." },
+  { id: 5, tipo: "Violência Moral", estado: "Encerrada", data: "2025-05-11", orgao: "Conselho Tutelar", motivo: "Caso arquivado", proximosPassos: "Nenhum", comentarios: "Denúncia arquivada por falta de provas." },
+  { id: 6, tipo: "Violência Física", estado: "Em análise", data: "2025-05-10", orgao: "Polícia", motivo: "Aguardando perícia", proximosPassos: "Perícia agendada", comentarios: "Perícia marcada para próxima semana." },
+  { id: 7, tipo: "Violência Psicológica", estado: "Pendente", data: "2025-05-09", orgao: "Delegacia da Mulher", motivo: "Vítima não compareceu", proximosPassos: "Tentativa de contato", comentarios: "Tentativa de contato realizada." },
+  { id: 8, tipo: "Violência Sexual", estado: "Pendente", data: "2025-05-08", orgao: "Polícia", motivo: "Falta de testemunhas", proximosPassos: "Aguardando testemunhas", comentarios: "Nenhum comentário adicional." }
+];
+
+function carregarDenuncias() {
+  const data = localStorage.getItem('denuncias');
+  if (!data) {
+    salvarDenuncias(denunciasIniciais);
+    return [...denunciasIniciais];
+  }
+  return JSON.parse(data);
+}
+
+function salvarDenuncias(denuncias) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(denuncias));
+}
+
+function atualizarLista() {
+  const lista = document.getElementById("lista-denuncias");
+  if (!lista) return;
+
+  const denuncias = carregarDenuncias();
+  lista.innerHTML = "";
+
+  denuncias.forEach(denuncia => {
+    const div = document.createElement("div");
+    div.className = "topico";
+    div.innerHTML = `
+      <h3>${denuncia.tipo}</h3>
+      <p>${denuncia.comentarios.length > 50 ? denuncia.comentarios.slice(0, 50) + "..." : denuncia.comentarios}</p>
+      <button onclick="verDetalhes(${denuncia.id})">Comentar</button>
+    `;
+    lista.appendChild(div);
+  });
+
+  criarGrafico();
+}
+
+function verDetalhes(id) {
+  localStorage.setItem("denunciaSelecionada", id);
+  window.location.href = "denunciasNaoAtendidas.html"; 
+}
+
+
+function criarGrafico() {
+  const canvas = document.getElementById('graficoPizza');
+  if (!canvas) return;
+
+  const denuncias = JSON.parse(localStorage.getItem("denuncias") || "[]");
+
+  const contagemTipos = {};
+
+  denuncias.forEach(d => {
+    const tipo = d.violencia?.trim().toLowerCase();
+    if (tipo) {
+      const label = capitalizar(tipo);
+      contagemTipos[label] = (contagemTipos[label] || 0) + 1;
+    }
+  });
+
+  const total = Object.values(contagemTipos).reduce((sum, val) => sum + val, 0);
+  if (total === 0) return;
+
+  const labels = Object.keys(contagemTipos);
+  const data = Object.values(contagemTipos);
+  const porcentagens = data.map(qtd => ((qtd / total) * 100).toFixed(1));
+
+  const ctx = canvas.getContext('2d');
+  if (window.graficoAtual) window.graficoAtual.destroy();
+
+  window.graficoAtual = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels.map((l, i) => `${l} (${porcentagens[i]}%)`),
+      datasets: [{
+        data: data,
+        backgroundColor: ['#fb7ec1', '#ff9f89', '#6a67ce', '#f3c623', '#3caea3'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 14 }
+          }
+        }
+      }
+    }
+  });
+}
+
+function capitalizar(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  criarGrafico();
+});
+
+/* V2 function criarGrafico() {
+  const canvas = document.getElementById('graficoPizza');
+  if (!canvas) return;
+
+  const denuncias = carregarDenuncias();
+  const contagemTipos = {};
+
+  // Contar ocorrências por tipo
+  denuncias.forEach(d => {
+    const tipo =  d.violencia || "Indefinido";
+    contagemTipos[tipo] = (contagemTipos[tipo] || 0) + 1;
+  });
+
+  const total = denuncias.length;
+  const labels = Object.keys(contagemTipos);
+  const data = labels.map(label => ((contagemTipos[label] / total) * 100).toFixed(1)); // Percentual com 1 casa
+
+  const ctx = canvas.getContext('2d');
+
+  if (window.graficoAtual) window.graficoAtual.destroy(); // Destroi gráfico anterior
+
+  window.graficoAtual = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels.map((l, i) => `${l} (${data[i]}%)`),
+      datasets: [{
+        data: data,
+        backgroundColor: ['#fb7ec1', '#ff9f89', '#6a67ce', '#f3c623', '#3caea3'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const label = context.label.split(" (")[0];
+              const valor = context.parsed;
+              return `${label}: ${valor}%`;
+            }
+          }
+        },
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 14 },
+            color: '#333'
+          }
+        }
+      }
+    }
+  });
+}*/
+
+
+/*function V1 criarGrafico() {
+  const canvas = document.getElementById('graficoPizza');
+  if (!canvas) return;
+
+  const denuncias = carregarDenuncias();
+  const contagemTipos = {};
+
+  denuncias.forEach(d => {
+    contagemTipos[d.tipo] = (contagemTipos[d.tipo] || 0) + 1;
+  });
+
+  const labels = Object.keys(contagemTipos);
+  const data = Object.values(contagemTipos);
+  const ctx = canvas.getContext('2d');
+
+  if (window.graficoAtual) window.graficoAtual.destroy();
+
+  window.graficoAtual = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: ['#fb7ec1', '#ff9f89', '#6a67ce', '#f3c623', '#3caea3'],
+        borderColor: 'white',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 14 },
+            color: '#333'
+          }
+        }
+      }
+    }
+  });
+}*/
+
+function carregarDetalhesDenuncia() {
+  const idSelecionado = localStorage.getItem("denunciaSelecionada");
+  if (!idSelecionado) {
+    alert("Nenhuma denúncia selecionada.");
+    window.location.href = "perfilprofissionais.html"; 
+    return;
+  }
+
+  const denuncias = carregarDenuncias();
+  const denuncia = denuncias.find(d => d.id === parseInt(idSelecionado));
+
+  if (!denuncia) {
+    alert("Denúncia não encontrada.");
+    window.location.href = "perfilprofissionais.html";
+    return;
+  }
+
+  document.getElementById("tipoViolencia").value = denuncia.tipo;
+  document.getElementById("estadoDenuncia").value = denuncia.estado;
+  document.getElementById("dataEnvio").value = denuncia.data;
+  document.getElementById("orgao").value = denuncia.orgao;
+  document.getElementById("motivo").value = denuncia.motivo;
+  document.getElementById("proximosPassos").value = denuncia.proximosPassos;
+  document.getElementById("comentarios").value = denuncia.comentarios;
+
+  const form = document.getElementById("formDenuncia");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    denuncia.tipo = document.getElementById("tipoViolencia").value;
+    denuncia.estado = document.getElementById("estadoDenuncia").value;
+    denuncia.data = document.getElementById("dataEnvio").value;
+    denuncia.orgao = document.getElementById("orgao").value;
+    denuncia.motivo = document.getElementById("motivo").value;
+    denuncia.proximosPassos = document.getElementById("proximosPassos").value;
+    denuncia.comentarios = document.getElementById("comentarios").value;
+
+    salvarDenuncias(denuncias);
+
+    alert("Denúncia atualizada com sucesso!");
+    window.location.href = "perfilprofissionais.html"; 
+  });
+
+  const btnResolver = document.getElementById("resolver");
+  btnResolver.addEventListener("click", () => {
+    denuncia.estado = "Encerrada";
+    document.getElementById("estadoDenuncia").value = "Encerrada";
+
+    salvarDenuncias(denuncias);
+    alert("Denúncia marcada como resolvida.");
+    window.location.href = "perfilprofissionais.html"; 
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  if (cardsContainer) {
+    carregarDados();
+  }
+
+  if (document.getElementById("lista-denuncias")) {
+    atualizarLista();
+  }
+
+  if (document.getElementById("graficoPizza")) {
+    criarGrafico();
+  }
+
+
+  if (document.getElementById("formDenuncia")) {
+    carregarDetalhesDenuncia();
+  }
+});
+</script>
+</body>
+</html>

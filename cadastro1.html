@@ -9,6 +9,32 @@
 </head>
 <body>
 
+    <style> @media (max-width: 576px) {
+    main {
+      padding: 1rem;
+      min-height: auto; 
+    }
+    form {
+      padding: 1.5rem !important;
+      max-width: 100% !important;
+      border-radius: 0.5rem !important;
+    }
+    
+    .col-md-6 {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    
+    .col-12.d-flex.justify-content-end {
+      justify-content: center !important;
+      margin-top: 1rem;
+    }
+    .col-12.d-flex.justify-content-end button {
+      width: 100%;
+      max-width: 300px;
+  }
+}</style>
+
 <main class="bg-light d-flex justify-content-center align-items-center min-vh-100">
     <form class="p-4 rounded bg-secondary text-white" style="max-width: 700px; width: 100%;" id="formDenuncia1">
         <h3 class="mb-4">Cadastro de Dados Pessoais</h3>

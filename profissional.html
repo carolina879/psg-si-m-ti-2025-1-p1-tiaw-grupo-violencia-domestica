@@ -79,11 +79,20 @@
             align-items: center;
             gap: 10px;
         }
+
         .search-bar input[type="text"] {
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
             flex: 1;
+        }
+
+        .dark-mode .search-bar input[type="text"] {
+            padding: 10px;
+            border: 1px solid #444444;
+            border-radius: 5px;
+            flex: 1;
+            background-color: #444444;
         }
         .search-bar select {
             padding: 10px;
@@ -102,6 +111,14 @@
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
+        }
+        .dark-mode .professional-card {
+            background-color: #444444;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(25% - 15px);
+            text-align: center;
         }
         .professional-card {
             background-color: #fff;
@@ -156,17 +173,78 @@
             color: white;
             cursor: pointer;
         }
+
+        .dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 28px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #3700b3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.large-font p,
+.large-font li,
+.large-font a,
+.large-font h1,
+.large-font h2,
+.large-font h3,
+.large-font h4,
+.large-font h5,
+.large-font span,
+.large-font label,
+.large-font button {
+  font-size: 1.5em !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
     </style>
 </head>
 <body>
-    <nav class="navbar">
+     <nav class="navbar">
     <div class="navbar-left">
-        <a href="index.html" class="navbar-logo">
+        <a href="escolha.html" class="navbar-logo"title="Disfarce a página">
             <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
         </a>
         <span class="navbar-title">Escuta Amiga</span>
     </div>
     <ul class="navbar-links">
+        <li><a href="inicio.html">Início</a></li>
         <li><a href="perfil.html">Sua Página</a></li>
         <li><a href="profissional.html">Colaboradores</a></li>
         <li><a href="quemsomos.html">Quem Somos</a></li>
@@ -175,6 +253,18 @@
         <li><a href="login.html">Login</a></li>
     </ul>
 </nav>
+<div class="d-flex justify-content-end align-items-center p-3 gap-3">
+  <label class="switch mb-0">
+    <input type="checkbox" id="modonoturno" />
+    <span class="slider round"></span>
+  </label>
+  <img id="fonteacessivel" 
+       src="imgsviolencia/aces1.png" 
+       alt="Acessibilidade" 
+       title="Acessibilidade" 
+       style="cursor: pointer; width: 40px; height: 40px;" />
+</div>
+
     <div class="container">
         
         <div class="top-professionals-section" style=" background: linear-gradient(90deg, #9B59B6, #920505); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
@@ -493,7 +583,7 @@
 
             function atualizarRanking() {
                 const topProfessionalsList = document.getElementById("topProfessionalsList");
-                topProfessionalsList.innerHTML = ""; // Limpar ranking anterior
+                topProfessionalsList.innerHTML = "";
 
                 const rankingArray = Object.entries(rankingProfissionais).sort((a, b) => b[1] - a[1]);
 
@@ -514,16 +604,13 @@
 
                     const nomeProfissional = document.getElementById("nomeProfissional").value;
 
-                    // Incrementar o contador do profissional no ranking
                     if (!rankingProfissionais[nomeProfissional]) {
                         rankingProfissionais[nomeProfissional] = 0;
                     }
                     rankingProfissionais[nomeProfissional]++;
 
-                    // Salvar no localStorage
                     localStorage.setItem("rankingProfissionais", JSON.stringify(rankingProfissionais));
 
-                    // Atualizar o ranking na interface
                     atualizarRanking();
 
                     alert("Feedback registrado com sucesso!");
@@ -531,9 +618,46 @@
                 });
             }
 
-            // Atualizar o ranking ao carregar a página
             atualizarRanking();
         });
+
+        const darkToggle = document.getElementById("modonoturno");
+  const fontBtn = document.getElementById("fonteacessivel");
+
+  function updateFontIcon(darkMode) {
+    fontBtn.src = darkMode 
+      ? "imgsviolencia/aces2.png" 
+      : "imgsviolencia/aces1.png";
+  }
+
+  window.onload = () => {
+    const darkMode = localStorage.getItem("darkMode") === "true";
+    const largeFont = localStorage.getItem("largeFont") === "true";
+
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+      darkToggle.checked = true;
+    }
+
+    if (largeFont) {
+      document.body.classList.add("large-font");
+    }
+
+    updateFontIcon(darkMode);
+  };
+
+  darkToggle.addEventListener("change", function () {
+    const isDark = this.checked;
+    document.body.classList.toggle("dark-mode", isDark);
+    localStorage.setItem("darkMode", isDark);
+    updateFontIcon(isDark);
+  });
+
+  fontBtn.addEventListener("click", function () {
+    const isLarge = document.body.classList.toggle("large-font");
+    localStorage.setItem("largeFont", isLarge);
+  });
+  
     </script>
 </body>
 <footer>

@@ -10,7 +10,7 @@
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        /* Navbar */
+
         .navbar {
             background: linear-gradient(90deg, #9B59B6, #920505);
             box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
@@ -35,7 +35,6 @@
             background-color: #c90f0f;
         }
 
-        /* Header */
         header {
             background-color: #dc3545;
             color: white;
@@ -55,7 +54,6 @@
             text-decoration: underline;
         }
 
-        /* Botões e inputs */
         .botao-container {
             text-align: center;
             margin: 20px 0;
@@ -86,7 +84,6 @@
             color: #333;
         }
 
-        /* Cards */
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -110,7 +107,6 @@
             font-weight: 500;
         }
 
-        /* Tabela */
         #tabela-wrapper {
             overflow-x: auto;
             margin-top: 30px;
@@ -139,7 +135,6 @@
             color: #333;
         }
 
-        /* Cronômetro */
         #cronometro {
             background-color: rgba(220, 53, 69, 0.8);
             color: white;
@@ -153,7 +148,6 @@
             z-index: 1;
         }
 
-        /* Footer */
         footer {
             background: linear-gradient(90deg, #9B59B6, #920505);
             color: white;
@@ -167,15 +161,15 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar d-flex align-items-center justify-content-between px-4">
     <div class="d-flex align-items-center">
-        <a href="index.html" class="navbar-logo">
+        <a href="escolha.html" class="navbar-logo" title="Disfarce a página">
             <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
         </a>
         <span class="navbar-title">Escuta Amiga</span>
     </div>
     <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+        <li><a href="inicio.html">Início</a></li>
         <li><a href="perfil.html">Sua página</a></li>
         <li><a href="profissional.html">Colaboradores</a></li>
         <li><a href="quemsomos.html">Quem somos</a></li>
@@ -185,12 +179,10 @@
     </ul>
 </nav>
 
-<!-- Cronômetro -->
 <div id="cronometro">
     Tempo na sessão: <span id="tempoSessao">00:00</span>
 </div>
 
-<!-- Conteúdo -->
 <div class="container">
     <h2 class="text-center my-4" style="color: #000000;">Relatório de Denúncias</h2>
 
@@ -283,7 +275,7 @@
 <br>
 <br>
 <br>
-<!-- Footer -->
+
 <footer>
     <div class="container d-flex flex-column align-items-center">
         <p>&copy; 2025 Escuta Amiga. Todos os direitos reservados.</p>
@@ -295,7 +287,6 @@
     </div>
 </footer>
 
-<!-- Script -->
 <script>
     let segundos = 0;
 
@@ -352,7 +343,6 @@
             tbody.appendChild(tr);
         });
 
-        // Adicionar event listeners para os botões excluir
         document.querySelectorAll(".btn-excluir").forEach(button => {
             button.addEventListener("click", (e) => {
                 const idx = Number(e.target.getAttribute("data-index"));
@@ -362,15 +352,13 @@
     }
 
     function excluirDenuncia(index) {
-        // Pega todas as denuncias do localStorage
+ 
         let denuncias = JSON.parse(localStorage.getItem("denuncias")) || [];
 
-        // Pega filtros atuais
         const dataFiltro = document.getElementById("input-periodo").value;
         const localFiltro = document.getElementById("input-local").value.toLowerCase();
         const tipoFiltro = document.getElementById("tipo-violencia").value.toLowerCase();
 
-        // Filtra as denuncias com filtros atuais
         const filtradas = denuncias.filter((denuncia) => {
             const dataMatch = !dataFiltro || denuncia.data === dataFiltro;
             const localMatch = !localFiltro || denuncia.local.toLowerCase().includes(localFiltro);
@@ -381,24 +369,20 @@
         const denunciaParaExcluir = filtradas[index];
         if (!denunciaParaExcluir) return;
 
-        // Remove do array original (compara objetos)
         denuncias = denuncias.filter(d => d !== denunciaParaExcluir);
 
-        // Atualiza o localStorage
         localStorage.setItem("denuncias", JSON.stringify(denuncias));
 
-        // Atualiza a tabela e cards
         gerarRelatorio();
     }
 
     function atualizarCards(denuncias) {
-        // Card 1: Total de denúncias
+
         document.querySelectorAll(".card")[0].querySelector(".card-body").innerHTML = `
             <h5 class="card-title">Total de denúncias</h5>
             <p>${denuncias.length}</p>
         `;
 
-        // Card 2: Distribuição por tipo de violência
         const tipos = {};
         denuncias.forEach(d => {
             const tipo = capitalizar(d.violencia);
@@ -410,7 +394,6 @@
             ${tipoHtml || "<p>Nenhuma</p>"}
         `;
 
-        // Card 3: Distribuição por estados
         const estados = new Set();
         denuncias.forEach(d => {
             const palavras = d.local.split(" ");
@@ -422,7 +405,6 @@
             <p>${estados.size} estado(s)</p>
         `;
 
-        // Card 4: Denúncias por período
         const porData = {};
         denuncias.forEach(d => {
             porData[d.data] = (porData[d.data] || 0) + 1;
@@ -438,10 +420,9 @@
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Inicializa com dados do localStorage ou cria demo (só se localStorage vazio)
     window.addEventListener("DOMContentLoaded", () => {
         if (!localStorage.getItem("denuncias")) {
-            // Exemplo de dados iniciais
+
             const demo = [
                 { data: "2025-05-18", local: "Belo Horizonte MG", violencia: "patrimonial" },
                 { data: "2025-05-20", local: "São Paulo SP", violencia: "fisica" },

@@ -1,11 +1,10 @@
-/* Reset básico */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body geral */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fff6ff;
@@ -13,7 +12,6 @@ body {
   line-height: 1.6;
 }
 
-/* NAVBAR */
 .custom-navbar {
   background-color: #cb6ce6;
   padding: 6px 15px;
@@ -46,7 +44,6 @@ body {
   text-decoration: underline;
 }
 
-/* Destaque no menu */
 .destaque {
   font-size: 1.1rem;
   font-weight: 600;
@@ -62,7 +59,6 @@ body {
   background-color: #ff7373;
 }
 
-/* CONTEÚDO PRINCIPAL */
 main {
   padding: 40px 20px;
   max-width: 1000px;
@@ -104,7 +100,7 @@ main img {
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 }
-/* SEÇÃO: Círculo da Violência / Tipos de Violência */
+
 .secao-com-imagem-lateral {
   display: flex;
   flex-direction: column;
@@ -128,7 +124,7 @@ main img {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Seção "Não se cale" com menos espaçamento */
+
 .imagem-com-texto {
   display: flex;
   flex-direction: column;
@@ -164,7 +160,7 @@ h3{
   color: white;
 }
 
-/* RESPONSIVIDADE ÚNICA */
+
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;

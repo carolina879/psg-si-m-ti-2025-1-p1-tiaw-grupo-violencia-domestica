@@ -1,4 +1,4 @@
-// Máscara para telefone
+
 var SPMaskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-0000';
   };
@@ -40,7 +40,7 @@ var SPMaskBehavior = function (val) {
     });*/
   });
   document.getElementById('formDenuncia1').addEventListener('submit', function (event) {
-    event.preventDefault(); // Impede envio automático
+    event.preventDefault(); 
   
     const nome = document.getElementById('inputName').value.trim();
     const telefone = document.getElementById('inputTel').value.trim();
@@ -90,7 +90,7 @@ var SPMaskBehavior = function (val) {
   document.getElementById('formFinal').addEventListener('submit', function (event) {
     event.preventDefault();
   
-    const arquivo = document.getElementById('inputFile').value; // Apenas nome do arquivo
+    const arquivo = document.getElementById('inputFile').value;
     const confirmado = document.getElementById('checkboxConfirmacao').checked;
   
     if (!confirmado) {
@@ -105,7 +105,6 @@ var SPMaskBehavior = function (val) {
   
     localStorage.setItem('denunciaParte3', JSON.stringify(dadosParte3));
   
-    // Aqui você pode juntar tudo se quiser enviar ou exibir resumo
     const parte1 = JSON.parse(localStorage.getItem('denunciaParte1'));
     const parte2 = JSON.parse(localStorage.getItem('denunciaParte2'));
     const parte3 = JSON.parse(localStorage.getItem('denunciaParte3'));
@@ -118,7 +117,6 @@ var SPMaskBehavior = function (val) {
   
     console.log('Denúncia completa:', denunciaCompleta);
   
-    // Aqui você pode enviar para um servidor ou exibir em uma página de resumo
     alert('Denúncia enviada com sucesso!');
   });
 

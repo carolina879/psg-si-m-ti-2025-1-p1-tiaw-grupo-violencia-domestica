@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="sitetit">Site de Receitas</title>
+  <link rel="stylesheet" href="botaodisfarce.css" />
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="navbar-left">
+    <h1 id="sitetit2">Site de Receitas</h1>
+    <a href="inicio.html" title="Voltar pra página inicial">
+      <img src="imgs/logo.png" width="40px" style="cursor:pointer; margin-left: 0; display: block;">
+    </a>
+    </div>
+    <nav>
+      <a href="#" class="active" id="navtit">Receitas</a>
+      <a href="#">Categorias</a>
+      <a href="#">Vídeos</a>
+      <a href="#">Sobre</a>
+    </nav>
+  </div>
+
+  <div class="top-section">
+    <button class="disfarce-button" onclick="trocarConteudo()">
+    <img id="disfarceicon" src="garfo.png" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 5px;">
+    </button>
+    <div class="intro" id="intro">
+    </div>
+    <div class="intro-image" id="introImage">
+    </div>
+  </div>
+
+  
+  <h3 class="section-title" id="sectiontitle">Receitas em destaques</h3>
+  <div class="cards" id="cardsContainer">
+    
+  </div>
+
+  <script src="botaodisfarce.js"></script>
+</body>
+</html>

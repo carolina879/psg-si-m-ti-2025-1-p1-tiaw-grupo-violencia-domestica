@@ -1,11 +1,10 @@
-/* Reset básico */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body geral */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fff6ff;
@@ -13,7 +12,6 @@ body {
   line-height: 1.6;
 }
 
-/* NAVBAR */
 .custom-navbar {
   background-color: #cb6ce6;
   padding: 6px 15px;
@@ -46,7 +44,6 @@ body {
   text-decoration: underline;
 }
 
-/* Destaque no menu */
 .destaque {
   font-size: 1.1rem;
   font-weight: 600;
@@ -62,7 +59,6 @@ body {
   background-color: #ff7373;
 }
 
-/* CONTEÚDO PRINCIPAL */
 main {
   padding: 40px 20px;
   max-width: 1000px;
@@ -104,7 +100,7 @@ main img {
   border-radius: 8px;
   box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
 }
-/* SEÇÃO: Círculo da Violência / Tipos de Violência */
+
 .secao-com-imagem-lateral {
   display: flex;
   flex-direction: column;
@@ -128,7 +124,6 @@ main img {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Seção "Não se cale" com menos espaçamento */
 .imagem-com-texto {
   display: flex;
   flex-direction: column;
@@ -164,59 +159,55 @@ h3{
   color: white;
 }
 
-/* RESPONSIVIDADE ÚNICA */
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;
     align-items: flex-start;
   }
-
   .navbar-nav .nav-link {
     margin-left: 0;
     margin-bottom: 10px;
+    font-size: 1rem;
   }
-
   .custom-navbar {
     padding: 10px 20px;
   }
-
   .site-name {
     font-size: 1.3rem;
-  }
-
-  main h1 {
-    font-size: 1.6rem;
-  }
-
-  .dupla-imagem {
-    flex-direction: column;
-  }
-
-  .imagem-com-texto img {
-    width: 100%;
-  }
-
-  .imagem-com-texto h2 {
-    font-size: 1.6rem;
-  } }
-  @media (max-width: 576px) {
-  .site-name {
-    font-size: 1rem;
     margin-top: 4px;
     margin-left: 2px;
   }
-  .navbar-nav .nav-link {
-    font-size: 0.9rem;
-    margin-left: 10px;
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+  .navbar-logo img {
+    max-height: 45px;
   }
   main {
-    padding: 15px 10px;
+    padding: 15px 5px;
   }
   main h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-top: 20px;
   }
+  .dupla-imagem,
+  .secao-com-imagem-lateral,
+  .imagem-com-texto {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .imagem-com-texto img {
+    width: 100%;
+  }
+  .imagem-com-texto h2 {
+    font-size: 1.6rem;
+  }
+  #map {
+    height: 250px;
+  }
 }
+
+
 @media (max-width: 576px) {
   .site-name {
     font-size: 1rem;
@@ -226,26 +217,33 @@ h3{
   .navbar-nav .nav-link {
     font-size: 0.9rem;
     margin-left: 10px;
-  }
-  main {
-    padding: 15px 10px;
-  }
-  main h1 {
-    font-size: 1.5rem;
-    margin-top: 20px;
-  }
-  footer {
-    padding: 15px 10px;
-    font-size: 0.9rem;
   }
   .custom-navbar .navbar-brand img {
     max-width: 140px;
   }
-}
-@media (max-width: 576px) {
+  main {
+    padding: 15px 10px;
+  }
+  main h1 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
   footer {
     padding: 15px 10px;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-links {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .navbar-title {
+    font-size: 1rem;
+  }
+  #map {
+    height: 180px;
   }
 }
 img.img-fluid {
@@ -322,6 +320,7 @@ input:checked + .slider:before {
 }
 
 
+.large-font body,
 .large-font p,
 .large-font li,
 .large-font a,
@@ -332,10 +331,56 @@ input:checked + .slider:before {
 .large-font h5,
 .large-font span,
 .large-font label,
-.large-font button {
+.large-font button,
+.large-font nav,
+.large-font .navbar-title,
+.large-font .navbar-links a,
+.large-font footer,
+.large-font .site-name,
+.large-font main,
+.large-font main p,
+.large-font main h1,
+.large-font main h2,
+.large-font main h3,
+.large-font section,
+.large-font section p,
+.large-font section h1,
+.large-font section h2,
+.large-font section h3,
+.large-font #map {
   font-size: 1.5em !important;
 }
 
+.large-font img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 10px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.large-font .navbar-links a {
+  padding: 10px 20px;
+}
+
+.large-font button,
+.large-font .btn,
+.large-font #botaodenuncia,
+.large-font #questionario {
+  padding: 15px 25px;
+  font-size: 1.2em;
+}
 #questionario {
   background-color: #ff5757;
   color: white;

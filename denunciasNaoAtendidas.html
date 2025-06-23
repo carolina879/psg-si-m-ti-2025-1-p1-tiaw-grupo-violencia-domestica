@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalhes da Denúncia - Escuta Amiga</title>
+  <link rel="stylesheet" href="perfilprofissionais.css" />
+</head>
+<body>
+  
+  <nav class="navbar d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center">
+            <a href="escolha.html" class="navbar-logo" title="Disfarce a página">
+                <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
+            </a>
+            <span class="navbar-title">Escuta Amiga</span>
+        </div>
+        <ul class="navbar-links d-flex list-unstyled mb-0 gap-3">
+          <li><a href="inicio.html">Início</a></li>
+            <li><a href="perfil.html">Sua página</a></li>
+            <li><a href="profissional.html">Colaboradores</a></li>
+            <li><a href="quemsomos.html">Quem somos</a></li>
+            <li><a href="politicadeprivacidade.html">Privacidade</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="perfilprofisionais.html" class="voltar">Voltar</a></li>
+        </ul>
+    </nav>
+    
+
+  <main>
+    <form id="formDenuncia" class="formulario">
+      <div class="form-group">
+        <label for="tipoViolencia">Descrição do tipo de denúncia:</label>
+        <select id="tipoViolencia" required>
+          <option value="Violência Física">Violência Física</option>
+          <option value="Violência Psicológica">Violência Psicológica</option>
+          <option value="Violência Sexual">Violência Sexual</option>
+          <option value="Violência Patrimonial">Violência Patrimonial</option>
+          <option value="Violência Moral">Violência Moral</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="estadoDenuncia">Estado da denúncia:</label>
+        <select id="estadoDenuncia" required>
+          <option value="Pendente">Pendente</option>
+          <option value="Em análise">Em análise</option>
+          <option value="Encerrada">Encerrada</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dataEnvio">Data da denúncia:</label>
+        <input type="date" id="dataEnvio" required />
+      </div>
+
+      <div class="form-group">
+        <label for="orgao">Órgão responsável:</label>
+        <input type="text" id="orgao" required />
+      </div>
+
+      <div class="form-group">
+        <label for="motivo">Motivo do não atendimento:</label>
+        <textarea id="motivo" rows="3" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="proximosPassos">Próximos passos:</label>
+        <textarea id="proximosPassos" rows="3"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="comentarios">Comentários:</label>
+        <textarea id="comentarios" rows="4"></textarea>
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit">Salvar</button>
+        <button type="button" id="resolver">Marcar como resolvida</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="perfilprofissionais.js"></script>
+</body>
+</html>
