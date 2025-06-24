@@ -92,7 +92,6 @@
         <li><a href="quemsomos.html">Quem Somos</a></li>
         <li><a href="politicadeprivacidade.html">Privacidade</a></li>
         <li><a href="FAQ.html">FAQ</a></li>
-        <li><a href="login.html">Login</a></li>
     </ul>
 </nav>
 
@@ -238,24 +237,25 @@ input:checked + .slider:before {
        title="Acessibilidade" 
        style="cursor: pointer; width: 40px; height: 40px;" />
 </div>
-  <main>
+  <main class="main-cesar" style="background-color: transparent;">
+    
     <section>
       
-      <h1>Quem Somos</h1>
+      <h1 class="p-somos">Quem Somos</h1>
     </section>
 
-    <section>
-      <p> Escuta Amiga é um espaço de acolhimento, apoio e escuta ativa para todas as pessoas que enfrentam a dor silenciosa da violência doméstica.</p>
+    <section >
+      <p class="p-somos"  > Escuta Amiga é um espaço de acolhimento, apoio e escuta ativa para todas as pessoas que enfrentam a dor silenciosa da violência doméstica.</p>
+      <br >
+      <p class="p-somos">Nasceu da necessidade urgente de oferecer uma rede segura, sensível e confiável, onde vítimas possam se expressar sem medo, receber orientação e dar o primeiro passo em direção à liberdade. Nosso compromisso é com o respeito, a empatia e a proteção de quem precisa ser ouvida.</p>
       <br>
-      <p>Nasceu da necessidade urgente de oferecer uma rede segura, sensível e confiável, onde vítimas possam se expressar sem medo, receber orientação e dar o primeiro passo em direção à liberdade. Nosso compromisso é com o respeito, a empatia e a proteção de quem precisa ser ouvida.</p>
+      <p class="p-somos">Aqui, cada história é tratada com seriedade e confidencialidade. Não julgamos, escutamos. Não ignoramos, agimos. Atuamos como ponte entre a vítima e os serviços de proteção, oferecendo informações, suporte e encaminhamentos para garantir segurança e dignidade.</p>
       <br>
-<p>Aqui, cada história é tratada com seriedade e confidencialidade. Não julgamos, escutamos. Não ignoramos, agimos. Atuamos como ponte entre a vítima e os serviços de proteção, oferecendo informações, suporte e encaminhamentos para garantir segurança e dignidade.</p>
-<br>
-<p>Se você está vivendo uma situação de violência ou conhece alguém que precisa de ajuda, saiba: você não está sozinha. A Escuta Amiga está aqui para caminhar com você.</p>
+      <p class="p-somos">Se você está vivendo uma situação de violência ou conhece alguém que precisa de ajuda, saiba: você não está sozinha. A Escuta Amiga está aqui para caminhar com você.</p>
 </section>
 
 <div class="botao-container">
-  <button class="botao-estilizado" onclick="window.location.href='index.html'">
+  <button class="botao-estilizado" onclick="window.location.href='inicio.html'">
     Voltar para a página inicial
   </button>
 </div>
@@ -287,6 +287,14 @@ input:checked + .slider:before {
   box-shadow: 0 8px 24px rgba(106,17,203,0.18);
 }
 
+.dark-mode .main-cesar{
+  background-color: #444444 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.dark-mode .p-somos{
+  color: #ffffff !important;
+}
 
 @media (max-width: 700px) {
   .footer-container {

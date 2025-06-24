@@ -38,7 +38,7 @@ if (usuarioCorrente.servico){
     document.getElementById("liLogin").innerHTML = visualLogin;
 
     let visualPerfil = '';
-    visualPerfil = `<a href="perfilprofissionais.html">Perfil do profissional</a>`
+    visualPerfil = `<a href="perfilprofissional2.html">Perfil do profissional</a>`
 
     document.getElementById("liPerfil").innerHTML = visualPerfil;
 

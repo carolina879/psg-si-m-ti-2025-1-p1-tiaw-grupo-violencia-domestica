@@ -51,6 +51,15 @@
         color: #cb6ce6; 
       }
 
+        .btn-voltar {
+    background: linear-gradient(90deg, #9B59B6, #920505);
+    color: white;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+
       @media (max-width: 600px) {
     form {
         width: 100%;
