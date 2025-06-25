@@ -23,6 +23,27 @@
     .navbar-logo img {
         max-height: 60px;
     }
+    .large-font .navbar-logo img {
+  transform: scale(1.5);
+  transform-origin: left center;
+  transition: transform 0.3s;
+}
+
+.large-font #fonteacessivel {
+  transform: scale(1.5);
+  transition: transform 0.3s;
+}
+
+.large-font #fonteacessivel {
+  transform: scale(1.5);
+  transition: transform 0.3s;
+}
+    .large-font .navbar,
+.large-font .navbar * {
+  font-size: 1.2em !important;
+}
+
+
     .navbar-title {
         color: white;
         font-size: 1.8rem;
@@ -179,6 +200,13 @@
   color: #e0e0e0 !important;
 }
 
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+}
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -233,10 +261,26 @@ input:checked + .slider:before {
   width: 0;
   height: 0;
 }
+
+.direcao{
+     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 30px; 
+}
+
+
+
+.large-font #fonteacessivel {
+  transform: scale(1.5);
+  transition: transform 0.3s;
+}
     </style>
 </head>
 <body>
-     <nav class="navbar">
+
+  <nav class="navbar">
     <div class="navbar-left">
         <a href="escolha.html" class="navbar-logo"title="Disfarce a página">
             <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
@@ -252,7 +296,7 @@ input:checked + .slider:before {
         <li><a href="FAQ.html">FAQ</a></li>
     </ul>
 </nav>
-<div class="d-flex justify-content-end align-items-center p-3 gap-3">
+<div class="direcao">
   <label class="switch mb-0">
     <input type="checkbox" id="modonoturno" />
     <span class="slider round"></span>

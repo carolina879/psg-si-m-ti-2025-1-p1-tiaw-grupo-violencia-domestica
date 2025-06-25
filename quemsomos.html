@@ -15,6 +15,9 @@
     padding: 0 10px;
 }
 }
+    html{
+      font-size:16px;
+    }
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
@@ -46,17 +49,8 @@
   color: #e0e0e0 !important;
 }
 
-.large-font p,
-.large-font li,
-.large-font a,
-.large-font h1,
-.large-font h2,
-.large-font h3,
-.large-font h4,
-.large-font h5,
-.large-font span,
-.large-font label,
-.large-font button {
+
+.large-font {
   font-size: 1.5em !important;
 }
 
@@ -74,6 +68,14 @@
       margin-bottom: 30px;
     }
 
+    .large-font .navbar-title
+    {
+      font-size: 1.5em !important;
+    }
+    .large-font h1.p-somos
+    {
+      font-size: 2.0em !important;
+    }
    
   </style>
 </head>
@@ -99,12 +101,12 @@
 
 <style>
 p{
-  font-size: 1.4rem;
+  font-size: 1.4em;
   line-height: 1.6;
   color: #333;
 }
 ol{
-  font-size: 1.4rem;
+  font-size: 1.4em;
   line-height: 1.6;
   color: #333;
   margin-left: 20px;
@@ -202,6 +204,8 @@ ol{
   transition: 0.4s;
   border-radius: 50%;
 }
+
+
 
 input:checked + .slider {
   background-color: #3700b3;
