@@ -111,14 +111,14 @@ function carregarPerguntasComunidade() {
     const div = document.createElement("div");
     div.className = "faq-item";
 
-    let html = `<div class="pergunta"><span>❓</span> ${item.pergunta}</div>`;
+    let html = `<div class="pergunta1"><span>❓</span> ${item.pergunta}</div>`;
 
     if (item.resposta) {
       html += `<div class="resposta-comunidade">${item.resposta}</div>`;
     } else {
       html += `
         <textarea placeholder="Responder..." rows="3" class="campo-resposta"></textarea>
-        <div class="botoes-comunidade">
+        <div class="botoes-comunidade" >
           <button class="responder" onclick="responderPergunta(${indexOriginal}, this)">Responder</button>
           <button class="editar" onclick="editarPergunta(${indexOriginal})">Editar</button>
           <button class="excluir" onclick="excluirPergunta(${indexOriginal})">Excluir</button>

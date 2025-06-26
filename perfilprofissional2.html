@@ -17,6 +17,24 @@
             background: linear-gradient(90deg, #9B59B6, #920505);
             box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
         }
+
+        .dark-mode .navbar {
+            background: linear-gradient(90deg, #3700b3, #2c003e);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
+        }
+
+        .dark-mode .navbar-links a:hover
+        {
+          background-color: #170249;
+        }
+        .dark-mode footer {
+            background: linear-gradient(90deg, #3700b3, #2c003e);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 0;
+        }
+
         .navbar-logo img {
             max-height: 70px;
         }
@@ -107,6 +125,12 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        .dark-mode .card-title
+        {
+          color: #fff;
+        }
+        
         .card-body p {
             margin: 0;
             color: #333;
@@ -134,6 +158,10 @@
             background:#9B59B6;
             color: white;
         }
+
+        .dark-mode th{
+          background: #3700b3;
+        }
         tr:hover {
             background-color: #f1f1f1;
         }
@@ -144,6 +172,27 @@
         td {
             color: #333;
         }
+
+        .dark-mode .card
+        {
+          background-color: #333;
+        }
+
+        .dark-mode #botao-relatorio
+        {
+          background: #3700b3;
+        }
+
+        .dark-mode p
+        {
+          color: #ffff;
+        }
+
+        .dark-mode .estadi
+        {
+          color: wheat
+        }
+
 
         #cronometro {
             background-color: rgba(220, 53, 69, 0.8);
@@ -242,12 +291,15 @@ input:checked + .slider:before {
   color: #ccc;
 }
 
+.large-font .navbar-title {
+  font-size: 2.5em !important;
+}
+
 
 .large-font p,
 .large-font li,
 .large-font a,
 .large-font h1,
-.large-font h2,
 .large-font h3,
 .large-font h4,
 .large-font h5,
@@ -398,13 +450,89 @@ input:checked + .slider:before {
     margin-top: 20px;
   }
 }
+@media (max-width: 768px) {
+  .grafico-container {
+    max-width: 100%;
+    padding: 5px;
+  }
+  .card-grid {
+    min-width: unset;
+    grid-template-columns: 1fr;
+  }
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+  #cronometro {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
+@media (max-width: 576px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .container {
+    padding: 0 5px;
+  }
+}
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+@media (max-width: 300px) {
+  .navbar-title,
+  h2,
+  h3,
+  .card-title {
+    font-size: 0.85rem !important;
+  }
+  .container {
+    padding: 0 1px !important;
+  }
+  th, td {
+    padding: 2px 2px !important;
+    font-size: 0.75em !important;
+  }
+  .card, .topico {
+    padding: 6px !important;
+    font-size: 0.85em !important;
+  }
+  #cronometro {
+    font-size: 8px !important;
+    padding: 2px 3px !important;
+    right: 2px !important;
+    bottom: 2px !important;
+  }
+  .navbar-logo img {
+    max-height: 30px !important;
+  }
+  #botao-relatorio {
+    padding: 6px 8px !important;
+    font-size: 0.85em !important;
+  }
+  .grafico-container {
+    min-width: unset !important;
+    max-width: 100% !important;
+    padding: 2px !important;
+  }
+
+}
+
+ 
     </style>
 </head>
 <body>
 
 <nav class="navbar d-flex align-items-center justify-content-between px-4">
     <div class="d-flex align-items-center">
-        <a href="inicio.html" class="navbar-logo">
+        <a href="escolha.html" class="navbar-logo">
             <img src="LogoTiaw.png" alt="Logo Escuta Amiga">
         </a>
         <span class="navbar-title">Escuta Amiga</span>
@@ -443,7 +571,7 @@ input:checked + .slider:before {
     </div>
 
 <div class="container" id="teste">
-    <h2 class="text-center my-4" id="msg-relatorio" >Relatório de Denúncias</h2>
+    <h2 class="text-center" id="msg-relatorio" >Relatório de Denúncias</h2>
 
     <div class="row">
         <div class="col-md-4">
@@ -540,7 +668,7 @@ input:checked + .slider:before {
     <div class="container">
       <div class="card-grid" id="lista-denuncias" aria-label="Lista de denúncias não atendidas"></div>
       <div class="grafico-container" aria-label="Gráfico de pizza de denúncias não atendidas">
-        <canvas id="graficoPizza" role="img" aria-label="Gráfico de pizza de denúncias não atendidas"></canvas>
+        <canvas id="graficoPizza" class="graficopizza" role="img" aria-label="Gráfico de pizza de denúncias não atendidas"></canvas>
       </div>
     </div>
   </section>

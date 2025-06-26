@@ -9,10 +9,8 @@
 
 </head>
 
-<body onload="inicializarFAQ()">
-
-  
-  <nav class="navbar" style="display: flex; align-items: center; padding: 10px 30px; background: linear-gradient(90deg, #9B59B6, #920505); box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);">
+<body>
+  <nav class="navbar">
   <div style="display: flex; align-items: center; gap: 10px;">
     <a href="escolha.html" class="navbar-logo">
       <img src="LogoTiaw.png" alt="Logo Escuta Amiga" style="max-height: 70px;"title="Disfarce a página" />
@@ -21,12 +19,12 @@
   </div>
 
   <div style="margin-left: auto; display: flex; gap: 15px; align-items: center;">
-    <a href="inicio.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Início</a>
-    <a href="perfil.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Sua página</a>
-    <a href="profissional.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Colaboradores</a>
-    <a href="quemsomos.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Quem somos</a>
-    <a href="politicadeprivacidade.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Privacidade</a>
-    <a href="FAQ.html" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">FAQ</a>
+    <a href="inicio.html" class ="navbarmais" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Início</a>
+    <a href="perfil.html" class ="navbarmais" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Sua página</a>
+    <a href="profissional.html" class ="navbarmais"  style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Colaboradores</a>
+    <a href="quemsomos.html" class ="navbarmais" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Quem somos</a>
+    <a href="politicadeprivacidade.html" class ="navbarmais" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">Privacidade</a>
+    <a href="FAQ.html"  class ="navbarmais" style="color: white; text-decoration: none; padding: 8px 18px; border-radius: 8px; transition: background 0.3s;">FAQ</a>
   </div>
 </nav>
 
@@ -48,7 +46,7 @@
   </div>
 
   <section class="container busca-disfarce">
-    <input type="text" id="busca" placeholder="Buscar pergunta..." oninput="filtrarPerguntas()" />
+    <input type="text" class="barra" id="busca" placeholder="Buscar pergunta..." oninput="filtrarPerguntas()" />
   </section>
 
   <main id="faq-container" class="container"></main>
@@ -56,7 +54,7 @@
   <section class="container">
     <h2>Envie sua pergunta anonimamente</h2>
     <form id="form-pergunta" onsubmit="enviarPergunta(event)">
-      <textarea id="novaPergunta" placeholder="Digite sua pergunta aqui..." required></textarea>
+      <textarea id="novaPergunta" class="textarea" placeholder="Digite sua pergunta aqui..." required></textarea>
       <button type="submit">Enviar Pergunta</button>
     </form>
   </section>
@@ -88,16 +86,18 @@
       </div>
     </div>
   </footer>
-  <script> const darkToggle = document.getElementById("modonoturno");
-  const fontBtn = document.getElementById("fonteacessivel");
-
-  function updateFontIcon(darkMode) {
-    fontBtn.src = darkMode 
-      ? "imgsviolencia/aces2.png" 
-      : "imgsviolencia/aces1.png";
-  }
-
+    <script src="FAQ.js"></script>
+  <script>
   window.onload = () => {
+    const darkToggle = document.getElementById("modonoturno");
+    const fontBtn = document.getElementById("fonteacessivel");
+
+    function updateFontIcon(darkMode) {
+      fontBtn.src = darkMode 
+        ? "imgsviolencia/aces2.png" 
+        : "imgsviolencia/aces1.png";
+    }
+
     const darkMode = localStorage.getItem("darkMode") === "true";
     const largeFont = localStorage.getItem("largeFont") === "true";
 
@@ -111,20 +111,23 @@
     }
 
     updateFontIcon(darkMode);
+
+
+    inicializarFAQ();
+
+
+    darkToggle.addEventListener("change", function () {
+      const isDark = this.checked;
+      document.body.classList.toggle("dark-mode", isDark);
+      localStorage.setItem("darkMode", isDark);
+      updateFontIcon(isDark);
+    });
+
+    fontBtn.addEventListener("click", function () {
+      const isLarge = document.body.classList.toggle("large-font");
+      localStorage.setItem("largeFont", isLarge);
+    });
   };
-
-  darkToggle.addEventListener("change", function () {
-    const isDark = this.checked;
-    document.body.classList.toggle("dark-mode", isDark);
-    localStorage.setItem("darkMode", isDark);
-    updateFontIcon(isDark);
-  });
-
-  fontBtn.addEventListener("click", function () {
-    const isLarge = document.body.classList.toggle("large-font");
-    localStorage.setItem("largeFont", isLarge);
-  });</script>
-  <script src="FAQ.js"></script>
-
+</script>
 </body>
 </html>

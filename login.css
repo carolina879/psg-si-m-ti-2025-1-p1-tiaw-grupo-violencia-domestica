@@ -3,6 +3,10 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.dark-mode .login-box{
+    background: #444444;
+}
+
 .container {
     width: 100vw;
     height: 100vh;
@@ -73,6 +77,9 @@ body {
     box-shadow: 0 1px 4px rgba(203,108,230,0.10);
 }
 
+.dark-mode .login-btn{
+background: linear-gradient( 90deg,#000080, #4B0082);
+}
 
 .arrow {
     font-size: 18px;
@@ -102,9 +109,18 @@ body {
     margin-top: 4px;
 }
 
+.dark-mode .entrar-btn {
+    background: #000080;
+}
+
 .site-name {
     margin-top: 10px;
     font-size: 14px;
     color: #cb6ce6;
     font-weight: bold;
+}
+
+.dark-mode .site-name
+{
+    color: #ffffff;
 }

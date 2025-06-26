@@ -263,4 +263,9 @@ img.img-fluid {
   border: none;
 }
 
+.dark-mode .btn-personalizado
+{
+  background-color: #3700b3;
+}
+
 

@@ -36,11 +36,6 @@
       margin-left: 5px;
     }
 
-     .navbar {
-            background: linear-gradient(90deg, #9B59B6, #920505);
-            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.10);
-            border-radius: 0 0;
-        }
         .navbar-logo img {
             max-height: 70px;
         }
@@ -57,9 +52,40 @@
             border-radius: 8px;
             transition: background 0.3s;
         }
+
+        .navbar {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.10);
+            border-radius: 0 0;
+        }
+        .dark-mode .navbar {
+            background: linear-gradient(90deg, #3700b3, #2c003e);
+            box-shadow: 0 4px 16px rgba(40, 40, 80, 0.1);
+        }
         .navbar-links a:hover {
             background-color: #c90f0f;
             color: white;
+        }
+
+        .dark-mode .navbar-links a:hover
+        {
+          background-color: #170249;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #9B59B6, #920505);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 0;
+        }
+
+        .dark-mode footer {
+            background: linear-gradient(90deg, #3700b3, #2c003e);
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            border-radius: 0;
         }
 
 
@@ -83,14 +109,6 @@
       margin: 20px 0;
       display: block;
     }
-
-     footer {
-            background: linear-gradient(90deg, #9B59B6, #920505);
-            color: white;
-            padding: 10px;
-            margin-top: 30px;
-            border-radius: 0;
-        }
 
 
    #map {
